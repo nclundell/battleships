@@ -2,7 +2,7 @@
 
 Simulate Battleship games using artificially intelligent players.
 
-Players:  
+#####Players:  
 1) Dumb Player (In Progress)  
    -Places ships and shoots to opponent board in predefined patterns that never change.  
 2) Chance Player (In Progress)  

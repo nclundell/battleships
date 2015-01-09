@@ -1,6 +1,6 @@
 # Battleships Project JTerm 2015
 
-Will contain runners to manage matches.
+Simulate Battleship games using artificially intelligent players.
 
 Players:
 1) Dumb Player (In Progress)

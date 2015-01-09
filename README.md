@@ -1,13 +1,11 @@
 # Battleships Project JTerm 2015
 
-Will contain a set of runners to manage matches.
+Will contain runners to manage matches.
 
 Players:
 1) Dumb Player (In Progress)
-   -Places ships and shoots to opponent board in predefined 
-    patterns that never change.
+   -Places ships and shoots to opponent board in predefined patterns that never change.
 2) Chance Player (In Progress)
-   -Places ships and choots to opponent board based on 
-    probabilities calculated for each spot on the board.
+   -Places ships and choots to opponent board based on probabilities calculated for each spot on the board.
 3) Genetic Player (In Progress)
    -Uses genetic algorithms to develop placing and shooting strategies.

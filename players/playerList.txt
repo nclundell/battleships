@@ -1,4 +1,0 @@
-"Player Name","Player Type"
-player_Dumb,computer
-player_Chance,computer
-player_Genetic,computer

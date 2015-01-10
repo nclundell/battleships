@@ -1,0 +1,7 @@
+"Player Name","Player Type","Ship Placing Type","Player Title"
+Dumb,computer,custom,"Dumb Player with Custom Ship Placer"
+Chance,computer,custom,"Chance Player with Custom Ship Placer"
+Genetic,computer,custom,"Genetic Player with Custom Ship Placer"
+Dumb,player,prebuilt,"Dumb Player with Prebuilt Ship Placer"
+Chance,player,prebuilt,"Chance Player with Prebuilt Ship Placer"
+Genetic,player,prebuilt,"Genetic Player with Prebuilt Ship Placer"

@@ -3,7 +3,7 @@ Simulate Battleship games using artificially intelligent players:
 
 <p><strong>Run Battleships:</strong></p>
 ```
-   battleships -[ship placer (d|c)] [player1 ID] -[ship placer (d|c)] [player2 ID] <br/>
+   battleships -[ship placer (d|c)] [player1 ID] -[ship placer (d|c)] [player2 ID] [rounds (optional)]
 ```
 
 <p><strong>Players:</strong></p>

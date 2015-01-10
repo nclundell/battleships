@@ -1,4 +1,4 @@
-# Battleships Project JTerm 2015
+# Battleships Project: JTerm 2015
 Simulate Battleship games using artificially intelligent players:
 
 <dl>

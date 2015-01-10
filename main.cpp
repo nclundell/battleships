@@ -6,25 +6,23 @@
  *
 **/
 #include <iostream>
-#include <list>
+#include <fstream>
 #include "main.h"
 
 using namespace std;
 
 int main(){
-//Get Players
-list players = getPlayers();
+//Get Commandline variable values
 
-
-
-//Pick Game Type
-    //1. Player vs. Player
-    //2. Player vs. Computer
-    //3. Computer vs. Computer
-
-//Pick number of rounds
-
-//Given game type, pick players
+//Check for valid players
+if(!validPlayer(player1)){
+    cout<<"Player1 does not exist: "<<player1;
+    return 0;
+}
+if(!validPlayer(player2)){
+    cout<<"Player2 does not exist: "<<player2;
+    return 0;
+}
 
 //Run Ship Placement Checker for each custom placer
     //if(!checkPlacement(player#Placement))
@@ -36,27 +34,13 @@ list players = getPlayers();
     return 0;
 }
 
-list getPlayers(){
-    //Define Variables
-    list<struct> players;
-    struct player{
-        string name;
-        string type;
-        string shipPlacer;
-        string title;
-    };
-    string entry;
-
-    //Build Player List from File
-    ifstream readPlayers("players/playerList.csv");
-    while(readPlayers){
-        getline(readPlayers, entry);
-        //Split Entry and Add to Struct
+bool validPlayer(string name){
+    string entry = "";
+    ifstream playerList
+    playerList.open("players/playerList.csv")
+    while(getline(playerList, entry)){
+        if(entry == name)
+            return true;
     }
-
-    //Drop CSV Titles
-    players.pop_front();
-
-    //Return List of Players
-    return players;
+    return false;
 }

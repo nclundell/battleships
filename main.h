@@ -9,9 +9,15 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include<list>
+//Commandline Variables
+
+int rounds = 50;
+char place1 = 'd';
+char place2 = 'd';
+string player1 = "Dumb";
+string player2 = "Dumb";
 
 //Return List of Players, Each Player as a Struct
-list getPlayers();
+bool validPlayer(string name);
 
 #endif

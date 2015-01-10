@@ -5,7 +5,6 @@ Simulate Battleship games using artificially intelligent players:
 ```
    battleships -[ship placer (d|c)] [player1 ID] -[ship placer (d|c)] [player2 ID] <br/>
 ```
-   Ex) battleships -d 1 -c 2  Creates game, player[1] with default ship placer vs player[2] with custom ship placer
 
 <p><strong>Players:</strong></p>
 1) Dumb Player (In Progress)

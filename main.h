@@ -19,5 +19,6 @@ string player2 = "Dumb";
 
 //Return List of Players, Each Player as a Struct
 bool validPlayer(string name);
+bool validPlacer(string name);
 
 #endif

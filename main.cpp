@@ -33,6 +33,20 @@ if(!validPlayer(player2)){
     return 0;
 }
 
+//Check for ship placer
+if(place1 == 'c'){
+    if(!validPlacer(player1)){
+        cout<<"Player1 does not have a ship placer.";
+        return false;
+    }
+}
+if(place2 == 'c'){
+    if(!validPlacer(player2)){
+        cout<<"Player2 does not have a ship placer.";
+        return false;
+    }
+}
+
 //Run Ship Placement Checker for each custom placer
     //if(!checkPlacement(player#Placement))
         //Exit with Error
@@ -48,8 +62,18 @@ bool validPlayer(string name){
     ifstream playerList
     playerList.open("players/playerList.csv")
     while(getline(playerList, entry)){
-        if(entry == name)
+        if(entry == name){
+            playerList.close();
             return true;
+        }
     }
+    playerList.close();
     return false;
+}
+
+bool validPlacer(string name){
+    string placerFile = "players/player"+name+"/place"+name;
+
+    ifstream infile(placerFile);
+    return infile.good();
 }

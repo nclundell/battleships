@@ -1,7 +1,8 @@
 # Battleships Project: JTerm 2015
-Simulate Battleship games using artificially intelligent players:
+Simulate Battleship games using artificially intelligent players.
 
-<p><strong>Run Battleships:</strong></p>
+===================
+###Run Battleships:
 ```
    battleships -[placer (d|c)] [name] -[placer (d|c)] [name] [matches (optional)]
 ```
@@ -9,8 +10,9 @@ Simulate Battleship games using artificially intelligent players:
 ```
    battleships -d Dumb -c Genetic 50
 ```
-
-<p><strong>Prebuilt Players:</strong></p>
+======================
+###Players:
+#####Prebuilt Players:
 1) Dumb Player (In Progress)
 <ul>
    <li>Places ships and shoots to opponent board in predefined patterns that never change.</li>
@@ -24,7 +26,7 @@ Simulate Battleship games using artificially intelligent players:
    <li>Uses genetic algorithms to develop placing and shooting strategies.</li>
 </ul>
 
-<p><strong>Additional Players:</strong></p>
+#####Additional Players:
 <ul>
    <li>
       Additional players can be added by adding a new folder player[name] into the players folder and appending [name] to the end of the playerList.csv file.

@@ -3,7 +3,11 @@ Simulate Battleship games using artificially intelligent players:
 
 <p><strong>Run Battleships:</strong></p>
 ```
-   battleships -[ship placer (d|c)] [player1] -[ship placer (d|c)] [player2] [rounds (optional)]
+   battleships -[placer (d|c)] [player1] -[placer (d|c)] [player2] [matches (optional)]
+```
+   For example, if you wanted to run the Dumb player with the default ship placer against the Genetic player with its custom ship placer, and run for 50 matches, the command would look like this:
+```
+   battleships -d Dumb -c Genetic 50
 ```
 
 <p><strong>Players:</strong></p>

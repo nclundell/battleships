@@ -27,7 +27,7 @@ Simulate Battleship games using artificially intelligent players:
 <p><strong>Additional Players:</strong></p>
 <ul>
    <li>
-      Additional players can be added by adding a new folder player[name] into the players folder.
+      Additional players can be added by adding a new folder player[name] into the players folder and appending [name] to the end of the playerList.csv file.
    </li>
    <li>
       Must include player[name].h and shoot[name].cpp files.

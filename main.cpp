@@ -7,12 +7,21 @@
 **/
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 #include "main.h"
 
 using namespace std;
 
-int main(){
+int main(int argc, char *argv[]){
+
 //Get Commandline variable values
+place1 = argv[1];
+player1 = argv[2];
+place2 = argv[3];
+player2 = argv[4];
+if(argc==6)
+    rounds = argv[5];
+
 
 //Check for valid players
 if(!validPlayer(player1)){

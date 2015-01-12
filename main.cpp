@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
+#include <string>
 #include "main.h"
 
 using namespace std;
@@ -15,13 +16,13 @@ using namespace std;
 int main(int argc, char *argv[]){
 
 //Get Commandline variable values
-place1 = argv[1];
-player1 = argv[2];
-place2 = argv[3];
-player2 = argv[4];
-if(argc==6)
-    rounds = argv[5];
-
+char place1 = *argv[1];
+string player1 = argv[2];
+char place2 = *argv[3];
+string player2 = argv[4];
+if(argc==6){
+    int rounds = atoi(argv[5]);
+}
 
 //Check for valid players
 if(!validPlayer(player1)){
@@ -32,6 +33,7 @@ if(!validPlayer(player2)){
     cout<<"Player2 does not exist: "<<player2;
     return 0;
 }
+
 
 //Check for ship placer
 if(place1 == 'c'){
@@ -54,13 +56,14 @@ if(place2 == 'c'){
     //runMatch(player1Placement, player1Shooter,player2Placement, player2Shooter);
 
 //Print Results
+
     return 0;
 }
 
 bool validPlayer(string name){
     string entry = "";
-    ifstream playerList
-    playerList.open("players/playerList.csv")
+    ifstream playerList;
+    playerList.open("players/playerList.csv");
     while(getline(playerList, entry)){
         if(entry == name){
             playerList.close();
@@ -72,8 +75,13 @@ bool validPlayer(string name){
 }
 
 bool validPlacer(string name){
-    string placerFile = "players/player"+name+"/place"+name;
-
-    ifstream infile(placerFile);
-    return infile.good();
+    string placerFile = "players/player"+name+"/place"+name+".cpp";
+    ifstream infile;
+    infile.open(placerFile.c_str());
+    if(infile){
+        infile.close();
+        return true;
+    }
+    infile.close();
+    return false;
 }

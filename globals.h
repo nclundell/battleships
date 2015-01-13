@@ -1,15 +1,13 @@
 /**
  *@author Nathan Lundell
  *@date January 2015
- *globals.cpp Header File
+ *Global Header File
  *
  *
 **/
 
 #ifndef GLOBALS_H
 #define GLOBALS_H
-
-#include <list>
 
 // Shot related
 const char SHOT = '@';

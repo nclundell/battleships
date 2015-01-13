@@ -3,25 +3,34 @@ CXX = g++
 
 MAIN = main.cpp main.h globals.h
 
-CHECKPLACER = runners/checkPlacer.cpp runners/checkPlacer.h globals.h
+MATCH = runners/match.cpp runners/match.h globals.h
 
-BATTLESHIPS = ${MAIN} ${CHECKPLACER}
+PLACER = runners/placer.cpp runners/placer.h globals.h
 
 clean:
-	rm -rf *.o battleships main checkPlacer
+	rm -rf *.o battleships bin/*
+	ls --group-directories-first --color=auto -F
+
+
+
+#Make Main ONLY
+match: ${MATCH}
+	g++ -o bin/match ${MATCH}
+	ls --group-directories-first --color=auto -F
+
+#Make Placer ONLY
+placer: ${PLACER}
+	g++ -o bin/placer ${PLACER}
 	ls --group-directories-first --color=auto -F
 
 #Make Main ONLY
 main: ${MAIN}
-	g++ -o main ${MAIN}
+	g++ -o battleships ${MAIN}
 	ls --group-directories-first --color=auto -F
 
-#Make checkPlacer Runner ONLY
-checkPlacer: ${CHECKPLACER}
-	g++ -o checkPlacer ${CHECKPLACER}
-	ls --group-directories-first --color=auto -F
-
-#Make Full Binary
-battleships: ${BATTLESHIPS}
-	g++ -o battleships ${BATTLESHIPS}
+#Make All Binaries
+battleships:
+	g++ -o bin/match ${MATCH}
+	g++ -o bin/placer ${PLACER}
+	g++ -o battleships ${MAIN}
 	ls --group-directories-first --color=auto -F

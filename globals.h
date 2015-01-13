@@ -6,9 +6,6 @@
  *
 **/
 
-#ifndef GLOBALS_H
-#define GLOBALS_H
-
 // Shot related
 const char SHOT = '@';
 const char MISS = '*';
@@ -30,6 +27,7 @@ const char PLACE_SHIP = 'Z';
 const int MAX_SHIPSIZE = 5;
 const int MIN_SHIPSIZE = 2;
 
-enum Direction { None=0, Horizontal=1, Vertical=2 };
+const int BOARD_HEIGHT = 10;
+const int BOARD_WIDTH  = 10;
 
-#endif
+enum Direction { None=0, Horizontal=1, Vertical=2 };

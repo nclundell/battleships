@@ -5,6 +5,7 @@
  *
  *
 **/
+
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
@@ -37,21 +38,18 @@ if(!validPlayer(player2)){
 
 //Check for ship placer
 if(place1 == 'c'){
-    if(!validPlacer(player1)){
+    if(!existsPlacer(player1)){
         cout<<"Player1 does not have a ship placer.";
-        return false;
+        return 0;
     }
 }
 if(place2 == 'c'){
-    if(!validPlacer(player2)){
+    if(!existsPlacer(player2)){
         cout<<"Player2 does not have a ship placer.";
-        return false;
+        return 0;
     }
 }
 
-//Run Ship Placement Checker for each custom placer
-    //if(!checkPlacement(player#Placement))
-        //Exit with Error
 //Run match simulator
     //runMatch(player1Placement, player1Shooter,player2Placement, player2Shooter);
 
@@ -74,7 +72,7 @@ bool validPlayer(string name){
     return false;
 }
 
-bool validPlacer(string name){
+bool existsPlacer(string name){
     string placerFile = "players/player"+name+"/place"+name+".cpp";
     ifstream infile;
     infile.open(placerFile.c_str());

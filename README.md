@@ -19,7 +19,7 @@ Groups currently available:
       main  (Initial game setup.)
    </li>
    <li>
-      match  (Runs matches between players.)
+      match  (Runs a single Battleships match.)
    </li>
    <li>
       placer  (Has players place ships on board and checks for valid placement.)

@@ -19,7 +19,10 @@ Groups currently available:
       main  (Initial game setup.)
    </li>
    <li>
-      checkPlacer  (Check that ship placers do so correctly.)
+      match  (Runs matches between players.)
+   </li>
+   <li>
+      placer  (Has players place ships on board and checks for valid placement.)
    </li>
 </ul>
 ===================

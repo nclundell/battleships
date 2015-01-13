@@ -6,7 +6,7 @@
 
 ===================
 ###Build Battleships
-Battleships can be built using the following command:
+Battleships can be built using the following command while in the battleships folder:
 ```
 make ${GROUP}
 ```

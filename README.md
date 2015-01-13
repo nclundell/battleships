@@ -5,11 +5,30 @@
 2) Create a dynamic system that allows for future expansion with new players.<br/>
 
 ===================
+###Build Battleships
+Battleships can be built using the following command:
+```
+make ${GROUP}
+```
+Groups currently available:
+<ul>
+   <li>
+      battleships  (Build all groups.)
+   </li>
+   <li>
+      main  (Initial game setup.)
+   </li>
+   <li>
+      checkPlacer  (Check that ship placers do so correctly.)
+   </li>
+</ul>
+===================
 ###Run Battleships:
+Run Battleships with the following cli command:
 ```
    battleships [placer (d|c)] [name] [placer (d|c)] [name] [matches (optional)]
 ```
-   For example, if you wanted to run the Dumb player with the default ship placer against the Genetic player with its custom ship placer, and run for 50 matches, the command would look like this:
+For example, if you wanted to run the Dumb player with the default ship placer against the Genetic player with its custom ship placer, and run for 50 matches, the command would look like this:
 ```
    battleships d Dumb c Genetic 50
 ```

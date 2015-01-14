@@ -15,7 +15,6 @@
 using namespace std;
 
 int main(int argc, char *argv[]){
-
 //Get Commandline variable values
 char place1 = *argv[1];
 string player1 = argv[2];
@@ -50,10 +49,17 @@ if(place2 == 'c'){
     }
 }
 
-//Run match simulator
-    //runMatch(player1Placement, player1Shooter,player2Placement, player2Shooter);
+//Place ships on board
+/*
+system("bin/place " + player1 + " " + player2);
 
+//Run matches.  Returns match[turns][Winner].
+for(int i=0; i<rounds; i++){
+    system("bin/match " + player1 + " " + player2);
+}
+*/
 //Print Results
+
 
     return 0;
 }

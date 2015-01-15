@@ -5,27 +5,6 @@
 2) Create a dynamic system that allows for future expansion with new players.<br/>
 
 ===================
-###Build Battleships
-Battleships can be built using the following command while in the battleships folder:
-```
-make ${GROUP}
-```
-Groups currently available:
-<ul>
-   <li>
-      battleships  (Build all groups.)
-   </li>
-   <li>
-      main  (Initial game setup.)
-   </li>
-   <li>
-      match  (Runs a single Battleships match.)
-   </li>
-   <li>
-      placer  (Has players place ships on board and checks for valid placement.)
-   </li>
-</ul>
-===================
 ###Run Battleships:
 Run Battleships with the following cli command:
 ```
@@ -37,7 +16,7 @@ For example, if you wanted to run the Dumb player with the default ship placer a
 ```
 ======================
 ###Players:
-#####Prebuilt Players:
+#####Computer Players:
 1) Dumb Player (In Progress)
 <ul>
    <li>Places ships and shoots to opponent board in predefined patterns that never change.</li>
@@ -54,12 +33,12 @@ For example, if you wanted to run the Dumb player with the default ship placer a
 #####Additional Players:
 <ul>
    <li>
-      Additional players can be added by adding a new folder player[name] into the players folder and appending [name] to the end of the playerList.csv file.
+      Additional players can be added by adding a new folder player[name] into the players folder and appending [name] to the end of the playerList.txt file.
    </li>
    <li>
-      Must include player[name].h and shoot[name].cpp files.
+      Must include shoot[name].py file.
    </li>
    <li>
-      The place[name].cpp file can be left out if using the default ship placer.
+      The place[name].py file can be left out if using the default ship placer.
    </li>
 </ul>

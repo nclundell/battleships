@@ -68,6 +68,7 @@ p2_opp_board = [["W"]*10 for i in range(10)]
     
 #Send Boards to Players for Ship Placement
 
+#Get Boards From Placers
 
 #Check boards for valid placement
 a_count = 0
@@ -93,9 +94,7 @@ for i in range(10):
 if(a_count != 5 or b_count != 4 or s_count !=3 or d_count != 3 or c_count !=2):
     print "There is an error with ship placement for %s" %p1Player
     
-
-
-
-    
+#Start Round
+        
 
     

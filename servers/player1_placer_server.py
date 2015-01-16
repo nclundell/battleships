@@ -1,7 +1,8 @@
 import socket
+import sys
 
 HOST = "127.0.0.1"
-PORT = 50000
+PORT = int(sys.argv[1])
 ADDR = (HOST,PORT)
 BUFFER = 1024
 

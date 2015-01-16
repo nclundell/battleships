@@ -1,5 +1,6 @@
 import os
 import sys
+import csv
 
 def command_args(argv):
     if(len(argv)<5 or len(argv)>6):
@@ -30,8 +31,10 @@ def command_args(argv):
     return p1Placer, p1Player, p2Placer, p2Player, rounds
     
     
-def pause_and_clear():
+def pause():
     raw_input("Press enter to continue")
+    
+def clear():
     os.system("clear")
     
 def custom_placer_path(player):
@@ -62,6 +65,14 @@ def valid_board(board):
     
     for i in range(10):
         for j in range(10):
+            #Check Diagonals
+            if((board[i][j] == board[i+1][j+1]) or (board[i][j] == board[i-1][j-1])):
+                print "Error: diagonal ship placement not allowed!"
+                return False
+            if((board[i][j] == board[i+1][j-1]) or(board[i][j] == board[i-1][j+1])):
+                print "Error: diagonal ship placement not allowed!"
+                return False
+            #Check Out-of-Bounds
             board_val = board[i][j]
             if board_val == "A":
                 a_count += 1
@@ -77,3 +88,17 @@ def valid_board(board):
     if(a_count != 5 or b_count != 4 or s_count !=3 or d_count != 3 or c_count !=2):
         return False
     return True
+
+def start_server(port):
+    return 0
+
+def get_player_port(player):
+    with open("players/playerList.csv") as players_csv:
+        player_reader = csv.reader(players_csv)
+        for listing in player_reader:
+            if(listing[0] == player):
+                return listing[1]
+    print player,"not found.  Using default port 50000"
+    return 50000
+    
+    

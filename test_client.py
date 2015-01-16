@@ -1,7 +1,8 @@
 import socket
+import sys
 
 HOST = "127.0.0.1"
-PORT = 50000
+PORT = int(sys.argv[1])
 BUFFER = 1024
 
 sock = socket.socket()

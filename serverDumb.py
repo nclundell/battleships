@@ -6,12 +6,14 @@ ADDR = (HOST,PORT)
 BUFFER = 1024
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind((ADDR))
+sock.bind((HOST,PORT))
 
 print "Server started, listening on port",PORT
 
+sock.listen(5)
 while True:
-    data, client = sock.recv(BUFFER)
+    conn, client = sock.accept()
+    data = conn.recv(BUFFER)
     print "Message from",client,": ",data
     if data == "Die Server, Die!": break
 sock.close()

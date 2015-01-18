@@ -28,11 +28,15 @@ p1_own_board = [["W"]*10 for i in range(10)]
 p1_opp_board = [["W"]*10 for i in range(10)]
 p2_own_board = [["W"]*10 for i in range(10)]
 p2_opp_board = [["W"]*10 for i in range(10)]
-    
+
+#Server/Client Variables
+p1Port = b_functions.get_player_port(p1Name)
+p2Port = b_functions.get_player_port(p2Name)
+
 #Start Sockets with Placers
-b_functions.start_server(b_functions.get_player_port(p1Name))
+b_functions.start_placer_server(1, p1Port)
 b_functions.pause()
-os.system("test_client.py 1")
+#os.system("test_client.py && echo 'Starting Server'",b_functions.get_player_port(p1Name))
 #Send Boards to Players for Ship Placement
 
 #Get Boards From Placers

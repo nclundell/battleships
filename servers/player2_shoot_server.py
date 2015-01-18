@@ -9,7 +9,7 @@ BUFFER = 1024
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((HOST,PORT))
 
-print "Server started, listening on port",PORT
+print "Player2 shooter server started, listening on port",PORT
 
 sock.listen(5)
 while True:

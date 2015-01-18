@@ -1,3 +1,7 @@
+ #@author Nathan Lundell
+ #@date January 2015
+ #Functions for Battleships simulator
+
 import os
 import sys
 import csv
@@ -66,10 +70,10 @@ def valid_board(board):
     for i in range(10):
         for j in range(10):
             #Check Diagonals
-            if((board[i][j] == board[i+1][j+1]) or (board[i][j] == board[i-1][j-1])):
+            if(((board[i][j] == board[i+1][j+1]) or (board[i][j] == board[i-1][j-1])) and board[i][j] != "W"):
                 print "Error: diagonal ship placement not allowed!"
                 return False
-            if((board[i][j] == board[i+1][j-1]) or(board[i][j] == board[i-1][j+1])):
+            if(((board[i][j] == board[i+1][j-1]) or(board[i][j] == board[i-1][j+1])) and board[i][j] != "W"):
                 print "Error: diagonal ship placement not allowed!"
                 return False
             #Check Out-of-Bounds
@@ -89,8 +93,16 @@ def valid_board(board):
         return False
     return True
 
-def start_server(port):
-    return 0
+def start_placer_server(player, port):
+    os.system("echo 'Start Server Notification'")
+    if(player == 1):
+        server = "player1_placer_server.py "+port
+    elif(player == 2):
+        server = "player2_placer_server.py "+port
+    else:
+        print "Player",player,"does not exist."
+        sys.exit(0)
+    os.system(server)
 
 def get_player_port(player):
     with open("players/playerList.csv") as players_csv:

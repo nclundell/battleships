@@ -4,7 +4,6 @@
 
 import os
 import sys
-import csv
 
 def command_args(argv):
     if(len(argv)<5 or len(argv)>6):
@@ -34,27 +33,28 @@ def command_args(argv):
         
     return p1Placer, p1Player, p2Placer, p2Player, rounds
     
-    
 def pause():
+    print "\n"
     raw_input("Press enter to continue")
     
 def clear():
     os.system("clear")
 
 def custom_placer_path(player):
-    return "players/"+player+"/placer.py"
+    return "players/"+player+"/"+player+"_placer.py"
 
-def custom_placer_check(placer, player, path):
-    if(placer == "-c"):
-        try:
-            with open(path) as f: print "Found "+path
-            return "-c"
-        except IOError as e:
-            print "Placer not found for",player
-            return "-d"
-    else:
-        print "Using default ship placer for %s" %player
-        return "-d"
+def custom_shooter_path(player):
+    return "players/"+player+"/"+player+"_shooter.py"
+
+def custom_placer_check(player):
+    try:
+        with open(custom_shooter_path(player)) as f: return True
+    except IOError as e: return False
+
+def custom_shooter_check(player):
+    try:
+        with open(custom_shooter_path(player)) as f: return True
+    except IOError as e: return False
 
 def print_board(board):
     for i in range(10):
@@ -92,14 +92,5 @@ def valid_board(board):
     #if(a_count != 5 or b_count != 4 or s_count !=3 or d_count != 3 or c_count !=2):
     #    return False
     return True
-
-def get_player_port(player):
-    with open("players/playerList.csv") as players_csv:
-        player_reader = csv.reader(players_csv)
-        for listing in player_reader:
-            if(listing[0] == player):
-                return listing[1]
-    print player,"not found.  Using default port 50000"
-    return 50000
     
     

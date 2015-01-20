@@ -3,22 +3,148 @@
  #Main runner for Battleships simulator
 
 import sys
-import socket
 import os
-import b_functions
+import time
+from b_functions import *
+from b_globals import *
+
+#Import Players
+sys.path.append("players/chance")
+sys.path.append("players/dumb")
+sys.path.append("players/genetic")
+
+from chance_placer import *
+from chance_shooter import *
+from dumb_placer import *
+from dumb_shooter import *
+from genetic_placer import *
+from genetic_shooter import *
+
+#Game Variables
+ships = [CARRIER, BATTLESHIP, SUBMARINE, DESTROYER, CRUISER]
+default = "dumb"
+board_size = 10
 
 #Clear Screen
-b_functions.clear()
+clear()
 
 #Get/Check Command Line Arguments
-p1Placer, p1Name, p2Placer, p2Name, rounds = b_functions.command_args(sys.argv)
+p1_placer_choice, p1_name, p2_placer_choice, p2_name, rounds = command_args(sys.argv)
+p1_shooter_choice, p2_shooter_choice = "-c"
 
 #Check for Placer File
-p1Placer = b_functions.custom_placer_check(p1Placer, p1Name, b_functions.custom_placer_path(p1Name))
-p2Placer = b_functions.custom_placer_check(p2Placer, p2Name, b_functions.custom_placer_path(p2Name))
+if(p1_placer_choice == "-c" and custom_placer_check(p1_name)):
+    print "Placer found for",p1_name
+else:
+    print "Placer not found for",p1_name
+    print "Using default placer for",p1_name
+    p1_placer_choice = "-d"
+    
+if(p2_placer_choice == "-c" and custom_placer_check(p2_name)):
+    print "Placer found for",p2_name
+else:
+    print "Placer not found for",p2_name
+    print "Using default placer for",p2_name
+    p2_placer_choice = "-d"
 
-b_functions.pause()
-b_functions.clear()
+#Move to Next Check
+time.sleep(5)
+clear()
 
-#Start Contest Manager
-os.system("python2 contest_manager.py "+p1Name+" "+p2Name+" "+"10")   
+#Check for Shooter File
+if(custom_shooter_check(p1_name)):
+    print "Shooter found for",p1_name
+else:
+    print "Shooter not found for",p1_name
+    print "Using default shooter for",p1_name
+    p1_shooter_choice = "-d"
+    
+if(custom_shooter_check(p2_name)):
+    print "Shooter found for",p2_name
+else:
+    print "Shooter not found for",p2_name
+    print "Using default shooter for",p2_name
+    p2_shooter_choice = "-d"
+
+#Move to Next Check
+time.sleep(5)
+clear()
+
+#Wait To Read Notice
+if(p1_placer_choice == "-d" or p2_placer_choice == "-d"):
+    print "Notice: Using %s player as default!" %default
+    time.sleep(5)
+    clear()
+
+#Make Boards
+p1_ship_board = [["W"]*board_size for i in range(board_size)]
+p1_shot_board = [["W"]*board_size for i in range(board_size)]
+p2_ship_board = [["W"]*board_size for i in range(board_size)]
+p2_shot_board = [["W"]*board_size for i in range(board_size)]
+
+#Instantiate Player 1 Placer
+if(p1_placer_choice == "-c"):
+    if(p1_name == "chance"):
+        p1_placer = chance_placer(p1_ship_board)
+    if(p1_name == "dumb"):
+        p1_placer = dumb_placer(p1_ship_board)
+    if(p1_name == "genetic"):
+        p1_placer = genetic_placer(p1_ship_board)
+else:
+    p1_placer = dumb_placer(board_sp1_ship_boardize)
+
+#Instantiate Player 2 Placer
+if(p2_placer_choice == "-c"):
+    if(p2_name == "chance"):
+        p2_placer = chance_placer(p2_ship_board)
+    if(p2_name == "dumb"):
+        p2_placer = dumb_placer(p2_ship_board)
+    if(p2_name == "genetic"):
+        p2_placer = genetic_placer(p2_ship_board)
+else:
+    p2_placer = dumb_placer(p2_ship_board)
+    
+##Instantiate Player 1 Shooter 
+#if(p1_shooter_choice == "-c"):
+#    if(p1_name == "chance"):
+#        p1_shooter = chance_shooter()
+#    if(p1_name == "dumb"):
+#        p1_shooter = dumb_shooter()
+#    if(p1_name == "genetic"):
+#        p1_shooter = genetic_shooter()
+#else:
+#    p1_shooter = dumb_shooter()
+#
+##Instantiate Player 2 Shooter 
+#if(p2_shooter_choice == "-c"):
+#    if(p2_name == "chance"):
+#        p2_shooter = chance_shooter()
+#    if(p2_name == "dumb"):
+#        p2_shooter = dumb_shooter()
+#    if(p2_name == "genetic"):
+#        p2_shooter = genetic_shooter()
+#else:
+#    p2_shooter = dumb_shooter()
+
+#Make Boards
+p1_ship_board = [["W"]*board_size for i in range(board_size)]
+p1_shot_board = [["W"]*board_size for i in range(board_size)]
+p2_ship_board = [["W"]*board_size for i in range(board_size)]
+p2_shot_board = [["W"]*board_size for i in range(board_size)]
+
+#Start Contest
+#for i in range(rounds):
+#    print i
+#Place Ships in Ship List
+for i in range(len(ships)):
+    p1_placer.place_ship(ships[i][0], ships[i][1])
+    p2_placer.place_ship(ships[i][0], ships[i][1])
+
+#Get Boards
+p1_ship_board = p1_placer.get_board()
+p2_ship_board = p2_placer.get_board()
+
+print p1_ship_board
+print p2_ship_board
+
+  

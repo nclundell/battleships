@@ -46,7 +46,7 @@ For example, if you wanted to run the Dumb player with the default ship placer a
 #####Additional Players:
 <ul>
    <li>
-      Additional players can be added by adding a new folder player[name] into the players folder.
+      Additional players can be added by adding a new folder [name] into the players folder.
    </li>
    <li>
       The [name]_shoot.py file can be left out if using the default shooter.

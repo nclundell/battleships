@@ -1,5 +1,5 @@
 PLAYER,PORT,
-Dumb,50000,
-Chance,50001,
-Genetic,50002,
+dumb,50001,
+chance,50002,
+genetic,50003,
 

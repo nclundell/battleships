@@ -40,9 +40,9 @@ def pause():
     
 def clear():
     os.system("clear")
-    
+
 def custom_placer_path(player):
-    return "players/player"+player+"/place"+player+".py"
+    return "players/"+player+"/placer.py"
 
 def custom_placer_check(placer, player, path):
     if(placer == "-c"):
@@ -61,48 +61,37 @@ def print_board(board):
         print board[i],"\n"
  
 def valid_board(board):
-    a_count = 0
-    b_count = 0
-    s_count = 0
-    d_count = 0
-    c_count = 0
-    
-    for i in range(10):
-        for j in range(10):
-            #Check Diagonals
-            if(((board[i][j] == board[i+1][j+1]) or (board[i][j] == board[i-1][j-1])) and board[i][j] != "W"):
-                print "Error: diagonal ship placement not allowed!"
-                return False
-            if(((board[i][j] == board[i+1][j-1]) or(board[i][j] == board[i-1][j+1])) and board[i][j] != "W"):
-                print "Error: diagonal ship placement not allowed!"
-                return False
-            #Check Out-of-Bounds
-            board_val = board[i][j]
-            if board_val == "A":
-                a_count += 1
-            elif board_val == "B":
-                b_count += 1
-            elif board_val == "S":
-                s_count += 1
-            elif board_val == "D":
-                d_count +=1
-            elif board_val == "C":
-                c_count += 1
-            
-    if(a_count != 5 or b_count != 4 or s_count !=3 or d_count != 3 or c_count !=2):
-        return False
+    #a_count = 0
+    #b_count = 0
+    #s_count = 0
+    #d_count = 0
+    #c_count = 0
+    #
+    #for i in range(10):
+    #    for j in range(10):
+    #        #Check Diagonals
+    #        if(((board[i][j] == board[i+1][j+1]) or (board[i][j] == board[i-1][j-1])) and board[i][j] != "W"):
+    #            print "Error: diagonal ship placement not allowed!"
+    #            return False
+    #        if(((board[i][j] == board[i+1][j-1]) or(board[i][j] == board[i-1][j+1])) and board[i][j] != "W"):
+    #            print "Error: diagonal ship placement not allowed!"
+    #            return False
+    #        #Check Out-of-Bounds
+    #        board_val = board[i][j]
+    #        if board_val == "A":
+    #            a_count += 1
+    #        elif board_val == "B":
+    #            b_count += 1
+    #        elif board_val == "S":
+    #            s_count += 1
+    #        elif board_val == "D":
+    #            d_count +=1
+    #        elif board_val == "C":
+    #            c_count += 1
+    #        
+    #if(a_count != 5 or b_count != 4 or s_count !=3 or d_count != 3 or c_count !=2):
+    #    return False
     return True
-
-def start_placer_server(player, port):
-    os.system("echo 'Start Server Notification'")
-    if(player == 1):
-        server = "player1_placer_server.py "+port
-    elif(player == 2):
-        server = "player2_placer_server.py "+port
-    else:
-        print "Player",player,"does not exist."
-        sys.exit(0)
-    os.system(server)
 
 def get_player_port(player):
     with open("players/playerList.csv") as players_csv:

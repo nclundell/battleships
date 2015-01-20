@@ -2,7 +2,6 @@
 
 ###Goals:
 1) Simulate Battleship games using artificially intelligent players.<br/>
-2) Create a dynamic system that allows for future expansion with new players.<br/>
 
 ===================
 ###Run Battleships:

@@ -10,10 +10,23 @@ Run Battleships with the following cli command:
 ```
    battleships -[placer (d|c)] [name] -[placer (d|c)] [name] [matches (optional)]
 ```
-For example, if you wanted to run the Dumb player with the default ship placer against the Genetic player with its custom ship placer, and run for 50 matches, the command would look like this:
+For example, if you wanted to run the Dumb player with the default ship placer against the Genetic player with its custom ship placer, and run for 75 matches, the command would look like this:
 ```
-   battleships -d Dumb -c Genetic 50
+   battleships -d Dumb -c Genetic 75
 ```
+======================
+###Defaults:
+<ul>
+   <li>
+      Rounds: 50
+   </li>
+   <li>
+      Placer: dumb
+   </li>
+   <li>
+      Shooter: dumb
+   </li>
+</ul>
 ======================
 ###Players:
 #####Computer Players:
@@ -33,12 +46,12 @@ For example, if you wanted to run the Dumb player with the default ship placer a
 #####Additional Players:
 <ul>
    <li>
-      Additional players can be added by adding a new folder player[name] into the players folder and appending [name] to the end of the playerList.txt file.
+      Additional players can be added by adding a new folder player[name] into the players folder.
    </li>
    <li>
-      Must include shoot[name].py file.
+      The [name]_shoot.py file can be left out if using the default shooter.
    </li>
    <li>
-      The place[name].py file can be left out if using the default ship placer.
+      The [name]_placer.py file can be left out if using the default ship placer.
    </li>
 </ul>

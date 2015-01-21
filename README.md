@@ -29,7 +29,7 @@ For example, if you wanted to run the Dumb player with the default ship placer a
 ======================
 ###Players:
 #####Computer Players:
-1) Dumb Player (In Progress)
+1) Dumb Player
 <ul>
    <li>Places ships and shoots to opponent board in predefined patterns that never change.</li>
 </ul>

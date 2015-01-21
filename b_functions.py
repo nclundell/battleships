@@ -4,6 +4,7 @@
 
 import os
 import sys
+from b_globals import *
 
 def command_args(argv):
     if(len(argv)<5 or len(argv)>6):
@@ -56,41 +57,35 @@ def custom_shooter_check(player):
         with open(custom_shooter_path(player)) as f: return True
     except IOError as e: return False
 
-def print_board(board):
-    for i in range(10):
+def print_board(board, board_size):
+    for i in range(board_size):
         print board[i],"\n"
  
-def valid_board(board):
-    #a_count = 0
-    #b_count = 0
-    #s_count = 0
-    #d_count = 0
-    #c_count = 0
-    #
-    #for i in range(10):
-    #    for j in range(10):
-    #        #Check Diagonals
-    #        if(((board[i][j] == board[i+1][j+1]) or (board[i][j] == board[i-1][j-1])) and board[i][j] != "W"):
-    #            print "Error: diagonal ship placement not allowed!"
-    #            return False
-    #        if(((board[i][j] == board[i+1][j-1]) or(board[i][j] == board[i-1][j+1])) and board[i][j] != "W"):
-    #            print "Error: diagonal ship placement not allowed!"
-    #            return False
-    #        #Check Out-of-Bounds
-    #        board_val = board[i][j]
-    #        if board_val == "A":
-    #            a_count += 1
-    #        elif board_val == "B":
-    #            b_count += 1
-    #        elif board_val == "S":
-    #            s_count += 1
-    #        elif board_val == "D":
-    #            d_count +=1
-    #        elif board_val == "C":
-    #            c_count += 1
-    #        
-    #if(a_count != 5 or b_count != 4 or s_count !=3 or d_count != 3 or c_count !=2):
-    #    return False
+def valid_board(board, board_size):
+    
     return True
+
+def check_game_over(p1_board, p2_board, board_size):
+    p1_dead = True
+    p2_dead = True
+    for i in range(board_size):
+        for j in range(board_size):
+            if(p1_board[i][j] != WATER and p1_board[i][j] != MISS and p1_board[i][j] != HIT and p1_board[i][j] != KILL):
+                p1_dead = False
+            if(p2_board[i][j] != WATER and p2_board[i][j] != MISS and p2_board[i][j] != HIT and p2_board[i][j] != KILL):
+                p2_dead = False
+    
+    if(p1_dead == False and p2_dead == False):
+        return "NONE"
+    if(p1_dead and p2_dead):
+        print "Tie Game!"
+        return "TIE"
+    if(p1_dead):
+        print "Player 1 Wins!"
+        return "P1"
+    if(p2_dead):
+        print "Player 2 Wins!"
+        return "P2"
+                
     
     

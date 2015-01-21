@@ -2,6 +2,7 @@
 WATER = 'W'
 KILL = 'K'
 HIT = 'H'
+MISS = 'M'
 
 #Ships [length,marker]
 CARRIER = [5,'a']

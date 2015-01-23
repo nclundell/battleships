@@ -39,11 +39,11 @@ For example, if you wanted to run the Dumb player with the default ship placer a
 <ul>
    <li>Places ships and shoots to opponent board in predefined patterns that never change.</li>
 </ul>
-2) Probability Player [prob] (In Progress)
+2) Probability Player (In Progress)
 <ul>
    <li>Places ships and shoots to opponent board based on probabilities calculated for each spot on the board.</li>
 </ul>
-3) Genetic Player [genetic] (In Progress)
+3) Genetic Player (In Progress)
 <ul>
    <li>Uses genetic algorithms to develop placing and shooting strategies.</li>
 </ul>

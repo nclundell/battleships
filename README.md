@@ -25,6 +25,12 @@ For example, if you wanted to run the Dumb player with the default ship placer a
    <li>
       Shooter: dumb
    </li>
+   <li>
+      Board Size: 10
+   </li>
+   <li>
+      Ship List: Carrier, Battleship, Submarine, Destroyer, Cruiser
+   </li>
 </ul>
 ======================
 ###Players:

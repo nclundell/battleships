@@ -63,8 +63,8 @@ For example, if you wanted to run the Dumb player with the default ship placer a
 </ol>
 
 #####Additional Players:
-<ol>
 Additional players can be added via the following steps:
+<ol>
    <li>
       Add a new folder [name] with relevant files into the players folder.
       <ul>

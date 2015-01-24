@@ -1,6 +1,6 @@
 #@author Nathan Lundell
 #@date January 2015
-#@player dumb
+#@player prob
 #
 #Ship Placer for @player
 
@@ -10,7 +10,7 @@ sys.path.append("../../")
 
 from b_globals import *
 
-class dumb_placer:
+class prob_placer:
     def __init__(self):
         self.ship_board = [[WATER]*board_size for i in range(board_size)]
         self.mark_board = [[WATER]*board_size for i in range(board_size)]

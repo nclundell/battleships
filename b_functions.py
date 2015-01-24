@@ -4,6 +4,7 @@
 
 import os
 import sys
+import time
 from b_globals import *
 
 def command_args(argv):
@@ -28,7 +29,7 @@ def command_args(argv):
     p2Player = argv[4]
     
     if(len(argv) >= 6):
-        rounds = argv[5]
+        rounds = int(argv[5])
     else:
         rounds = 50
         
@@ -37,7 +38,10 @@ def command_args(argv):
 def pause():
     print "\n"
     raw_input("Press enter to continue")
-    
+
+def sleep(s):
+    time.sleep(s)
+
 def clear():
     os.system("clear")
 
@@ -57,13 +61,45 @@ def custom_shooter_check(player):
         with open(custom_shooter_path(player)) as f: return True
     except IOError as e: return False
 
-def print_board(board, board_size):
+def print_board(board):
     for i in range(board_size):
         print board[i],"\n"
+    pause()
  
-def valid_board(board, board_size):
-    
+def valid_board(board):
+    #Currently Does Not Check For Diagonals
+    ship_counts = [0]*len(ships)
+    for i in range(board_size):
+        for j in range(board_size):
+            if(board[i][j] != WATER):
+                ship_counts[board[i][j]] += 1
+    for s in range(len(ships)):
+        if (ship_counts[s] != ships[s]):
+            return False
     return True
+
+def mark_kill(ship, ship_board, shot_board):
+    for i in range(board_size):
+        for j in range(board_size):
+            if(ship_board[i][j] == ship):
+                shot_board[i][j] = KILL
+                ship_board[i][j] = KILL
+
+def is_sunk(ship, ship_board, shot_board):
+    hits_needed = ships[ship]
+    for i in range(board_size):
+        for j in range(board_size):
+            if(ship_board[i][j] == ship and shot_board[i][j] == HIT):
+                hits_needed -= 1
+    if(hits_needed == 0):
+        return True
+    return False
+
+def average_shot_count(shot_counts):
+    total = 0
+    for i in range(len(shot_counts)):
+        total += shot_counts[i]
+    return total/len(shot_counts)
 
 def check_game_over(p1_board, p2_board, board_size):
     p1_dead = True
@@ -78,13 +114,16 @@ def check_game_over(p1_board, p2_board, board_size):
     if(p1_dead == False and p2_dead == False):
         return "NONE"
     if(p1_dead and p2_dead):
-        print "Tie Game!"
+        if(print_games):
+            print "\nTie Game!"
         return "TIE"
     if(p1_dead):
-        print "Player 1 Wins!"
+        if(print_games):
+            print "\nPlayer 1 Wins!"
         return "P1"
     if(p2_dead):
-        print "Player 2 Wins!"
+        if(print_games):
+            print "\nPlayer 2 Wins!"
         return "P2"
                 
     

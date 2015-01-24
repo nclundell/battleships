@@ -9,46 +9,44 @@ from b_functions import *
 from b_globals import *
 
 #Import Players
-sys.path.append("players/chance")
+sys.path.append("players/prob")
 sys.path.append("players/dumb")
 sys.path.append("players/genetic")
 
-from chance_placer import *
-from chance_shooter import *
+from prob_placer import *
+from prob_shooter import *
 from dumb_placer import *
 from dumb_shooter import *
 from genetic_placer import *
 from genetic_shooter import *
-
-#Game Variables
-ships = [CARRIER, BATTLESHIP, SUBMARINE, DESTROYER, CRUISER]
-default = "dumb"
-board_size = 10
 
 #Clear Screen
 clear()
 
 #Get/Check Command Line Arguments
 p1_placer_choice, p1_name, p2_placer_choice, p2_name, rounds = command_args(sys.argv)
-p1_shooter_choice, p2_shooter_choice = "-c"
 
 #Check for Placer File
 if(p1_placer_choice == "-c" and custom_placer_check(p1_name)):
     print "Placer found for",p1_name
-else:
+elif(p1_placer_choice == "-c" and not custom_placer_check(p1_name)):
     print "Placer not found for",p1_name
     print "Using default placer for",p1_name
     p1_placer_choice = "-d"
+else:
+    print "Using default placer for",p1_name
     
 if(p2_placer_choice == "-c" and custom_placer_check(p2_name)):
     print "Placer found for",p2_name
-else:
+elif(p2_placer_choice == "-c" and not custom_placer_check(p2_name)):
     print "Placer not found for",p2_name
     print "Using default placer for",p2_name
     p2_placer_choice = "-d"
+else:
+    print "Using default placer for",p2_name
 
 #Move to Next Check
-time.sleep(3)
+sleep(3)
 clear()
 
 #Check for Shooter File
@@ -67,67 +65,103 @@ else:
     p2_shooter_choice = "-d"
 
 #Move to Next Check
-time.sleep(3)
+sleep(3)
 clear()
 
 #Wait To Read Notice
 if(p1_placer_choice == "-d" or p2_placer_choice == "-d"):
     print "Notice: Using %s player as default!" %default
-    time.sleep(3)
+    sleep(3)
     clear()
 
 #Instantiate Player 1 Placer
 if(p1_placer_choice == "-c"):
-    if(p1_name == "chance"):
-        p1_placer = chance_placer(board_size)
+    if(p1_name == "prob"):
+        p1_placer = prob_placer()
     if(p1_name == "dumb"):
-        p1_placer = dumb_placer(board_size)
+        p1_placer = dumb_placer()
     if(p1_name == "genetic"):
-        p1_placer = genetic_placer(board_size)
+        p1_placer = genetic_placer()
+    ##Add New Player here!!!!!
+    #elif(p1_name == "[name]"):
+    #    p1_placer = [name]_placer()
 else:
-    p1_placer = dumb_placer(board_size)
-
+    print "Using default ship placer for Player 1"
+    p1_placer = dumb_placer()
+    time.sleep(3)
+    clear()
+    
 #Instantiate Player 2 Placer
 if(p2_placer_choice == "-c"):
-    if(p2_name == "chance"):
-        p2_placer = chance_placer(board_size)
+    if(p2_name == "prob"):
+        p2_placer = prob_placer()
     if(p2_name == "dumb"):
-        p2_placer = dumb_placer(board_size)
+        p2_placer = dumb_placer()
     if(p2_name == "genetic"):
-        p2_placer = genetic_placer(board_size)
+        p2_placer = genetic_placer()
+    ##Add New Player here!!!!!
+    #elif(p2_name == "[name]"):
+    #    p2_placer = [name]_placer()
 else:
-    p2_placer = dumb_placer(board_size)
+    print "Using default ship placer for Player 2"
+    p2_placer = dumb_placer()
+    time.sleep(3)
+    clear()
     
 #Instantiate Player 1 Shooter 
-if(p1_shooter_choice == "-c"):
-    if(p1_name == "chance"):
-        p1_shooter = chance_shooter(board_size)
-    if(p1_name == "dumb"):
-        p1_shooter = dumb_shooter(board_size)
-    if(p1_name == "genetic"):
-        p1_shooter = genetic_shooter(board_size)
+if(p1_name == "prob"):
+    p1_shooter = prob_shooter()
+elif(p1_name == "dumb"):
+    p1_shooter = dumb_shooter()
+elif(p1_name == "genetic"):
+    p1_shooter = genetic_shooter()
+##Add New Player here!!!!!
+#elif(p1_name == "[name]"):
+#    p1_shooter = [name]_shooter()
 else:
-    p1_shooter = dumb_shooter(board_size)
+    print "Using default shooter for Player 1"
+    p1_shooter = dumb_shooter()
+    time.sleep(3)
+    clear()
 
 #Instantiate Player 2 Shooter 
-if(p2_shooter_choice == "-c"):
-    if(p2_name == "chance"):
-        p2_shooter = chance_shooter(board_size)
-    if(p2_name == "dumb"):
-        p2_shooter = dumb_shooter(board_size)
-    if(p2_name == "genetic"):
-        p2_shooter = genetic_shooter(board_size)
+if(p2_name == "prob"):
+    p2_shooter = prob_shooter()
+elif(p2_name == "dumb"):
+    p2_shooter = dumb_shooter()
+elif(p2_name == "genetic"):
+    p2_shooter = genetic_shooter()
+##Add New Player here!!!!!
+#elif(p2_name == "[name]"):
+#    p2_shooter = [name]_shooter()
 else:
-    p2_shooter = dumb_shooter(board_size)
+    print "Using default shooter for Player 2"
+    p2_shooter = dumb_shooter()
+    time.sleep(3)
+    clear()
 
 #Start Contest
 for r in range(rounds):
     #Place Ships in Ship List
     for s in range(len(ships)):
-        p1_placer.place_ship(ships[s][0], ships[s][1])
-        p2_placer.place_ship(ships[s][0], ships[s][1])
+        p1_placer.place_ship(ships[s], s)
+        p2_placer.place_ship(ships[s], s)
+        
     #Validate Boards
+    p1_valid = valid_board(p1_placer.ship_board)
+    p2_valid = valid_board(p2_placer.ship_board)
     
+    if not p1_valid:
+        print "Player 1 has invalid ship placement"
+        sys.exit(0)
+    if not p2_valid:
+        print "Player 2 has invalid ship placement"
+        sys.exit(0)
+    if(print_games):
+        print "Valid ship placements"    
+        sleep(3)
+        clear()
+        
     game_over = False
     while(game_over != True):
 
@@ -136,7 +170,7 @@ for r in range(rounds):
         p2_shot = p2_shooter.make_shot()
         
         #Mark Shot 1
-        if(p2_placer.board[p1_shot[0]][p1_shot[1]] == WATER):
+        if(p2_placer.ship_board[p1_shot[0]][p1_shot[1]] == WATER or p2_placer.ship_board[p1_shot[0]][p1_shot[1]] == KILL):
             p2_placer.mark_shot(p1_shot, MISS)
             p1_shooter.mark_shot(p1_shot, MISS)
         else:
@@ -144,32 +178,39 @@ for r in range(rounds):
             p1_shooter.mark_shot(p1_shot, HIT)
         
         #Mark Shot 2
-        if(p1_placer.board[p2_shot[0]][p2_shot[1]] == WATER):
+        if(p1_placer.ship_board[p2_shot[0]][p2_shot[1]] == WATER or p1_placer.ship_board[p2_shot[0]][p2_shot[1]] == KILL):
             p1_placer.mark_shot(p2_shot, MISS)
             p2_shooter.mark_shot(p2_shot, MISS)
         else:
             p1_placer.mark_shot(p2_shot, HIT)
             p2_shooter.mark_shot(p2_shot, HIT)
-            
-        #Print Boards to Screen
-        print "Game #"+str(r+1)+"\n"
-        print "Player 1 Shots: 							Player 2 Shots:"
-        for i in range(board_size):
-            print p1_shooter.board[i],"\t\t\t",p2_shooter.board[i]
         
-        #Print Shot Result
-        if(p1_shooter.board[p1_shot[0]][p1_shot[1]] == HIT):
-            print "\n Player 1 Hit! "+str(p1_shot)
-        else:
-            print "\n Player 1 Miss! "+str(p1_shot)
+        if(print_games):
+            #Print Boards to Screen
+            print "Game #"+str(r+1)+"\n"
+            print "Player 1 Shots: 							Player 2 Shots:"
+            print "    0    1    2    3    4    5    6    7    8    9                          0    1    2    3    4    5    6    7    8    9"
+            print "   ------------------------------------------------                        ------------------------------------------------"
+            for i in range(board_size):
+                print i,p1_shooter.shot_board[i],"\t\t\t",i,p2_shooter.shot_board[i],"\n"
             
-        if(p2_shooter.board[p1_shot[0]][p2_shot[1]] == HIT):
-            print "\n Player 2 Hit! "+str(p2_shot)
-        else:
-            print "\n Player 2 Miss! "+str(p2_shot)
-        
+            #Print Shot Result
+            if(p1_shooter.shot_board[p1_shot[0]][p1_shot[1]] == HIT):
+                print "\n Player 1 Hit! "+str(p1_shot)
+                if(is_sunk(p2_placer.ship_board[p1_shot[0]][p1_shot[1]], p2_placer.ship_board, p1_shooter.shot_board) == True):
+                    mark_kill(p2_placer.ship_board[p1_shot[0]][p1_shot[1]], p2_placer.ship_board, p1_shooter.shot_board)
+            else:
+                print "\n Player 1 Miss! "+str(p1_shot)
+                
+            if(p2_shooter.shot_board[p1_shot[0]][p2_shot[1]] == HIT):
+                print "\n Player 2 Hit! "+str(p2_shot)
+                if(is_sunk(p1_placer.ship_board[p2_shot[0]][p2_shot[1]], p1_placer.ship_board, p2_shooter.shot_board) == True):
+                    mark_kill(p1_placer.ship_board[p2_shot[0]][p2_shot[1]], p1_placer.ship_board, p2_shooter.shot_board)
+            else:
+                print "\n Player 2 Miss! "+str(p2_shot)
+            
         #Check for Game Over
-        winner = check_game_over(p1_placer.board, p2_placer.board, board_size)
+        winner = check_game_over(p1_placer.ship_board, p2_placer.ship_board, board_size)
         if(winner == "NONE"):
             game_over = False
         if(winner == "TIE"):
@@ -181,15 +222,20 @@ for r in range(rounds):
             game_over = True
             p2_shooter.wins += 1
         
-        #Pause For Next Shot
-        time.sleep(0)
-        clear()
-    
+        if(print_games):
+            #Pause For Next Shot
+            sleep(1)
+            clear()
+        
     #Reset For Next Game
     p1_placer.reset()
     p2_placer.reset()
     p1_shooter.reset()
     p2_shooter.reset()
 
-print p1_shooter.wins
-print p2_shooter.wins
+#Print Results
+print "Player 1 wins:",p1_shooter.wins
+print "Player 2 wins:",p2_shooter.wins
+print "Player 1 shot average:",average_shot_count(p1_shooter.shot_records)
+print "Player 2 shot average:",average_shot_count(p2_shooter.shot_records)
+

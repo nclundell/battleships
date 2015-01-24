@@ -35,28 +35,51 @@ For example, if you wanted to run the Dumb player with the default ship placer a
 ======================
 ###Players:
 #####Computer Players:
-1) Dumb Player [dumb]
-<ul>
-   <li>Places ships and shoots to opponent board in predefined patterns that never change.</li>
-</ul>
-2) Probability Player (In Progress)
-<ul>
-   <li>Places ships and shoots to opponent board based on probabilities calculated for each spot on the board.</li>
-</ul>
-3) Genetic Player (In Progress)
-<ul>
-   <li>Uses genetic algorithms to develop placing and shooting strategies.</li>
-</ul>
+<ol>
+   <li>
+      Dumb Player [dumb]
+      <ul>
+         <li>
+            Places ships and shoots to opponent board in predefined patterns that never change.
+         </li>
+      </ul>
+   </li>
+   <li>
+      Probability Player (In Progress)
+      <ul>
+         <li>
+            Places ships and shoots to opponent board based on probabilities calculated for each spot on the board.
+         </li>
+      </ul>
+   </li>
+   <li>
+      Genetic Player (In Progress)
+      <ul>
+         <li>
+            Uses genetic algorithms to develop placing and shooting strategies.
+         </li>
+      </ul>
+   </li>
+</ol>
 
 #####Additional Players:
-<ul>
+Additional players can be added via the following steps:
+<ol>
    <li>
-      Additional players can be added by adding a new folder [name] into the players folder.
+      Add a new folder [name] with relevant files into the players folder.
+      <ul>
+         <li>
+            The [name]_shoot.py file is reqired.
+         </li>
+         <li>
+            The [name]_placer.py file can be left out if using the default ship placer.
+         </li>
+      </ul>
    </li>
    <li>
-      The [name]_shoot.py file can be left out if using the default shooter.
+      Add [name]_placer.py and [name]_shooter.py to import list at top of battleships.py
    </li>
    <li>
-      The [name]_placer.py file can be left out if using the default ship placer.
+      Add relevant code to instantiation sections of battleships.py
    </li>
-</ul>
+</ol>

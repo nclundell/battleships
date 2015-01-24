@@ -7,11 +7,11 @@
 ###Run Battleships:
 Run Battleships with the following cli command:
 ```
-   battleships -[placer (d|c)] [name] -[placer (d|c)] [name] [matches (optional)]
+   battleships.py -[placer (d|c)] [name] -[placer (d|c)] [name] [matches (optional)]
 ```
 For example, if you wanted to run the Dumb player with the default ship placer against the Genetic player with its custom ship placer, and run for 75 matches, the command would look like this:
 ```
-   battleships -d Dumb -c Genetic 75
+   battleships.py -d Dumb -c Genetic 75
 ```
 ======================
 ###Defaults:

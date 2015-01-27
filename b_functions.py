@@ -5,35 +5,23 @@
 import os
 import sys
 import time
+import random
 from b_globals import *
 
 def command_args(argv):
-    if(len(argv)<5 or len(argv)>6):
-        print "Error in arguments."
-        sys.exit(0)
-    
-    if(argv[1] == "-c" or argv[1] == "-d"):
-        p1Placer = argv[1]
-    else:
-        print "Error in arguments."
-        sys.exit(0)
-    
-    p1Player = argv[2]
-        
-    if(argv[3] == "-c" or argv[3] == "-d"):
-        p2Placer = argv[3]
-    else:
-        print "Error in arguments."
-        sys.exit(0)
-        
-    p2Player = argv[4]
-    
-    if(len(argv) >= 6):
-        rounds = int(argv[5])
+    p1_name = argv[1]
+    p2_name = argv[2]
+
+    if(len(argv) == 4 ):
+        rounds = int(argv[3])
     else:
         rounds = 50
         
-    return p1Placer, p1Player, p2Placer, p2Player, rounds
+    if(len(argv) > 4):
+        print "Error in arguments given!"
+        sys.exit()
+        
+    return p1_name, p2_name, rounds
     
 def pause():
     print "\n"
@@ -51,15 +39,32 @@ def custom_placer_path(player):
 def custom_shooter_path(player):
     return "players/"+player+"/"+player+"_shooter.py"
 
+def player_exists(player):
+    for p in players:
+        if player == p:
+            return True
+    print "Player "+player+" not found!"
+    return False
+
 def custom_placer_check(player):
     try:
-        with open(custom_shooter_path(player)) as f: return True
-    except IOError as e: return False
+        with open(custom_shooter_path(player)) as f:
+            print player+" placer found!"
+            return True
+    except IOError as e:
+        print player+" placer not found.  Using default placer."
+        using_defaults = True
+        return False
 
 def custom_shooter_check(player):
     try:
-        with open(custom_shooter_path(player)) as f: return True
-    except IOError as e: return False
+        with open(custom_shooter_path(player)) as f:
+            print player+" shooter found!"
+            return True
+    except IOError as e:
+        print player+" shooter not found.  Using default shooter."
+        using_defaults = True
+        return False
 
 def print_board(board):
     for i in range(board_size):
@@ -125,6 +130,8 @@ def check_game_over(p1_board, p2_board, board_size):
         if(print_games):
             print "\nPlayer 2 Wins!"
         return "P2"
-                
+
+def get_rand_float(num):
+    return random.uniform(0, )
     
     

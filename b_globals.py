@@ -12,9 +12,12 @@ DESTROYER = 3
 CRUISER = 2
 
 #Game Variables
+players = ["dumb", "prob", "genetic"]
 ships = [CARRIER, BATTLESHIP, SUBMARINE, DESTROYER, CRUISER]
 ship_max_length = max(ships)
 ship_min_length = min(ships)
 default = "dumb"
 board_size = 10
+wave_count = 10
 print_games = True
+using_default = False

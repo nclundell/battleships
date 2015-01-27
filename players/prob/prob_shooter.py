@@ -33,6 +33,8 @@ class prob_shooter:
         
     def mark_shot(self, shot, result):
         self.shot_board[shot[0]][shot[1]] = result
+        #print "Probability Board: \n"
+        #print_board(self.prob_board)
         self.reweigh_board() #Reweigh prob board after every turn
         
     def reset(self):
@@ -90,11 +92,11 @@ class prob_shooter:
                 self.prob_board = self.new_weight(i, j)
                 
     def new_weight(self, row, col):
-        weight = 0
+        weight = 0.0
         for i in range(ship_max_length - ship_min_length):
             weight += self.get_vertical_weight(row, col, i)
             weight += self.get_horizontal_weight(row, col, i)
-        return weight
+        return float(weight)
             
     def get_vertical_weight(self, row, col, length):
         weight = 0

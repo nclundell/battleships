@@ -17,8 +17,6 @@ class genetic_shooter:
         self.shot_board = [[WATER]*self.board_size for i in range(self.board_size)]
         self.last_row = 0
         self.last_col = 0
-        self.shot_count = 0
-        self.shot_records = []
         self.wins = 0
     
     def make_shot(self): 
@@ -29,8 +27,6 @@ class genetic_shooter:
         
     def reset(self):
         self.shot_board = [["W"]*self.board_size for i in range(self.board_size)]
-        self.shot_records.append(self.shot_count)
-        self.shot_count = 0
         self.last_row = 0
         self.last_col = 0
 

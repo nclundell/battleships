@@ -17,12 +17,9 @@ class prob_shooter:
         self.prob_board = self.read_initial_probs()
         self.last_row = 0
         self.last_col = 0
-        self.shot_list = [] #Shots Taken in Current Game
-        self.shot_count = 0
-        self.shot_records = [] #Number of Shots per Game
         self.wins = 0 #Total Wins in Full Match
         
-    def make_shot(self):
+    def make_shot(self, shot_count):
         if(self.shot_board[self.last_row][self.last_col] == HIT):
             finish_ship()
         elif(self.damaged_ship_exists()):
@@ -40,8 +37,6 @@ class prob_shooter:
     def reset(self):
         self.prob_board = self.reweighBoard() #Reweigh before resetting shot board to bring successful shots over to next game
         self.shot_board = [[WATER]*self.board_size for i in range(self.board_size)]
-        self.shot_records.append(self.shot_count)
-        self.shot_count = 0
         self.last_row = 0
         self.last_col = 0
         
@@ -134,8 +129,9 @@ class prob_shooter:
         max_weight = -1
         for i in range(board_size):
             for j in range(board_size):
-                if(self.prob_board[i][j] > max_weight):
-                    max_weight = self.prob_board[i][j]
+                weight = self.prob_board[i][j]
+                if(weight > max_weight):
+                    max_weight = weight
                     self.last_row = i
                     self.last_col = j
     

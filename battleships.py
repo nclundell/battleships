@@ -91,11 +91,11 @@ else:
 #Print Default Notice
 if(using_default):
     print "Notice: Using %s player as default!" %default
-
 #Pause before Start Game
 sleep(3)
 clear()
 
+shots_per_game = []
 #Start Contest
 for r in range(rounds):
     #Place Ships in Ship List
@@ -117,12 +117,14 @@ for r in range(rounds):
         print "Valid ship placements"    
         sleep(3)
         clear()
-        
+
+    game_shots = 0
     game_over = False
     while(game_over != True):
         #Get Shots
-        p1_shot = p1_shooter.make_shot()
-        p2_shot = p2_shooter.make_shot()
+        p1_shot = p1_shooter.make_shot(game_shots)
+        p2_shot = p2_shooter.make_shot(game_shots)
+        game_shots += 1
         
         #Mark Shot 1
         if(p2_placer.ship_board[p1_shot[0]][p1_shot[1]] == WATER or p2_placer.ship_board[p1_shot[0]][p1_shot[1]] == KILL):
@@ -186,21 +188,23 @@ for r in range(rounds):
         if(winner == "P2"):
             game_over = True
             p2_shooter.wins += 1
-        
         if(print_games):
             #Pause For Next Shot
             sleep(1)
             clear()
-        
+            
     #Reset For Next Game
     p1_placer.reset()
     p2_placer.reset()
     p1_shooter.reset()
     p2_shooter.reset()
+    shots_per_game.append(game_shots)
+    game_shots = 0
 
 #Print Results
 print "Player 1 wins:"+str(p1_shooter.wins)+"/"+str(rounds)
 print "Player 2 wins:"+str(p2_shooter.wins)+"/"+str(rounds)
-print "Player 1 shot average:",average_shot_count(p1_shooter.shot_records)
-print "Player 2 shot average:",average_shot_count(p2_shooter.shot_records)
+print "Shot Average:",average_shot_count(shots_per_game)
+##Make folder "results/" before uncommenting.
+#export_shot_records(p1_name, p2_name, shots_per_game)
 

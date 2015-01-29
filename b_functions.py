@@ -106,6 +106,14 @@ def average_shot_count(shot_counts):
         total += shot_counts[i]
     return total/len(shot_counts)
 
+def export_shot_records(p1_name, p2_name, shot_records):
+    filename = "results/"+p1_name+"VS"+p2_name
+    shots = open(filename, 'w+')
+    for i in range(len(shot_records)):
+        shots.write(str(shot_records[i])+"\n")
+    shots.close()
+    
+
 def check_game_over(p1_board, p2_board, board_size):
     p1_dead = True
     p2_dead = True

@@ -48,7 +48,7 @@ def player_exists(player):
 
 def custom_placer_check(player):
     try:
-        with open(custom_shooter_path(player)) as f:
+        with open(custom_placer_path(player)) as f:
             print player+" placer found!"
             return True
     except IOError as e:
@@ -83,22 +83,32 @@ def valid_board(board):
             return False
     return True
 
-def mark_kill(ship, ship_board, shot_board):
+def mark_kill(shot, ship_board, shot_board):
+    #print_board(ship_board)
+    ship = ship_board[shot[0]][shot[1]]
     for i in range(board_size):
         for j in range(board_size):
             if(ship_board[i][j] == ship):
                 shot_board[i][j] = KILL
-                ship_board[i][j] = KILL
+                #? correct below?
+                #ship_board[i][j] = KILL
 
-def is_sunk(ship, ship_board, shot_board):
-    hits_needed = ships[ship]
+def check_is_sunk(shot, ship_board, shot_board, kills):
+    #print "Shot: ",shot
+    print "Ship Type: ", ship_board[shot[0]][shot[1]]
+    print_board(ship_board)
+    if isinstance(ship_board[shot[0]][shot[1]], str):
+       print "shot =", shot
+       print "b_functions.py,hip_board[shot[0][shot[1]] =", ship_board[shot[0]][shot[1]]
+    hits_needed = ships[ship_board[shot[0]][shot[1]]]
     for i in range(board_size):
         for j in range(board_size):
-            if(ship_board[i][j] == ship and shot_board[i][j] == HIT):
+            if(ship_board[i][j] == ship_board[shot[0]][shot[1]] and shot_board[i][j] == HIT):
                 hits_needed -= 1
     if(hits_needed == 0):
-        return True
-    return False
+        kills += 1
+        print "Mark Kill!!!"
+        mark_kill(shot, ship_board, shot_board)
 
 def average_shot_count(shot_counts):
     total = 0
@@ -114,27 +124,15 @@ def export_shot_records(p1_name, p2_name, shot_records):
     shots.close()
     
 
-def check_game_over(p1_board, p2_board, board_size):
-    p1_dead = True
-    p2_dead = True
-    for i in range(board_size):
-        for j in range(board_size):
-            if(p1_board[i][j] != WATER and p1_board[i][j] != MISS and p1_board[i][j] != HIT and p1_board[i][j] != KILL):
-                p1_dead = False
-            if(p2_board[i][j] != WATER and p2_board[i][j] != MISS and p2_board[i][j] != HIT and p2_board[i][j] != KILL):
-                p2_dead = False
-    
-    if(p1_dead == False and p2_dead == False):
-        return "NONE"
-    if(p1_dead and p2_dead):
-        if(print_games):
-            print "\nTie Game!"
+def check_game_over(p1_kills, p2_kills):
+    if(p1_kills == len(ships) and p2_kills == len(ships)):
+        print "\nTie Game!"
         return "TIE"
-    if(p1_dead):
+    elif(p1_kills == len(ships)):
         if(print_games):
             print "\nPlayer 1 Wins!"
         return "P1"
-    if(p2_dead):
+    elif(p2_kills == len(ships)):
         if(print_games):
             print "\nPlayer 2 Wins!"
         return "P2"

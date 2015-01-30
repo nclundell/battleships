@@ -2,7 +2,7 @@
 WATER = 'W'
 KILL = 'K'
 HIT = 'H'
-MISS = 'M'
+MISS = '!'
 
 #Ships [length,marker]
 CARRIER = 5
@@ -16,8 +16,7 @@ players = ["dumb", "prob", "genetic"]
 ships = [CARRIER, BATTLESHIP, SUBMARINE, DESTROYER, CRUISER]
 ship_max_length = max(ships)
 ship_min_length = min(ships)
-default = "dumb"
 board_size = 10
-wave_count = 10
 print_games = True
+default = "dumb"
 using_default = False

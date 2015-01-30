@@ -13,7 +13,7 @@ sys.path.append("players/prob")
 sys.path.append("players/dumb")
 sys.path.append("players/genetic")
 
-from prob_placer import *
+#from prob_placer import *
 from prob_shooter import *
 from dumb_placer import *
 from dumb_shooter import *
@@ -41,6 +41,7 @@ if(player_exists(p1_name)):
         #    p1_placer = [name]_placer()
     else:
         p1_placer = dumb_placer()
+        using_default = True
     #Player 1 Shooter
     if(custom_shooter_check(p1_name)):
         if(p1_name == "prob"):
@@ -54,6 +55,7 @@ if(player_exists(p1_name)):
         #    p1_shooter = [name]_shooter()
     else:
         p1_shooter = dumb_shooter()
+        using_default = True
 else:
     sys.exit(0)
     
@@ -72,6 +74,7 @@ if(player_exists(p2_name)):
         #    p2_placer = [name]_placer()
     else:
         p2_placer = dumb_placer()
+        using_default = True
     #Player 2 Shooter
     if(custom_shooter_check(p2_name)):
         if(p2_name == "prob"):
@@ -84,7 +87,8 @@ if(player_exists(p2_name)):
         #elif(p2_name == "[name]"):
         #    p2_shooter = [name]_shooter()
     else:
-        p2_shooter = dumb_shooter()    
+        p2_shooter = dumb_shooter()
+        using_default = True   
 else:
     sys.exit(0)
 
@@ -123,11 +127,18 @@ for r in range(rounds):
     while(game_over != True):
         #Get Shots
         p1_shot = p1_shooter.make_shot(game_shots)
+        if isinstance(p1_shot, str):
+            print "p1_shot is a string!"
+            pause()
         p2_shot = p2_shooter.make_shot(game_shots)
+        if isinstance(p2_shot, str):
+            print "p2_shot is a string!"
+            pause()
         game_shots += 1
         
         #Mark Shot 1
-        if(p2_placer.ship_board[p1_shot[0]][p1_shot[1]] == WATER or p2_placer.ship_board[p1_shot[0]][p1_shot[1]] == KILL):
+        #if(p2_placer.ship_board[p1_shot[0]][p1_shot[1]] == WATER or p2_placer.ship_board[p1_shot[0]][p1_shot[1]] == KILL):
+        if(p2_placer.ship_board[p1_shot[0]][p1_shot[1]] == WATER):
             p2_placer.mark_shot(p1_shot, MISS)
             p1_shooter.mark_shot(p1_shot, MISS)
         else:
@@ -135,13 +146,20 @@ for r in range(rounds):
             p1_shooter.mark_shot(p1_shot, HIT)
         
         #Mark Shot 2
-        if(p1_placer.ship_board[p2_shot[0]][p2_shot[1]] == WATER or p1_placer.ship_board[p2_shot[0]][p2_shot[1]] == KILL):
+        #if(p1_placer.ship_board[p2_shot[0]][p2_shot[1]] == WATER or p1_placer.ship_board[p2_shot[0]][p2_shot[1]] == KILL):
+        if(p1_placer.ship_board[p2_shot[0]][p2_shot[1]] == WATER):
             p1_placer.mark_shot(p2_shot, MISS)
             p2_shooter.mark_shot(p2_shot, MISS)
         else:
             p1_placer.mark_shot(p2_shot, HIT)
             p2_shooter.mark_shot(p2_shot, HIT)
         
+        if isinstance(p1_shot, str):
+            print "test2: p1_shot is a string!"
+            pause()
+        if isinstance(p2_shot, str):
+            print "test2: p2_shot is a string!"
+            pause()
         if(print_games):
             #Print Boards to Screen
             print "Game #"+str(r+1)+"\n"
@@ -154,30 +172,26 @@ for r in range(rounds):
             #Print Shot Result
             if(p1_shooter.shot_board[p1_shot[0]][p1_shot[1]] == HIT):
                 print "\n Player 1 Hit! "+str(p1_shot)
-                if(is_sunk(p2_placer.ship_board[p1_shot[0]][p1_shot[1]], p2_placer.ship_board, p1_shooter.shot_board) == True):
-                    mark_kill(p2_placer.ship_board[p1_shot[0]][p1_shot[1]], p2_placer.ship_board, p1_shooter.shot_board)
+                check_is_sunk(p1_shot, p2_placer.ship_board, p1_shooter.shot_board, p1_shooter.kills)
             else:
                 print "\n Player 1 Miss! "+str(p1_shot)
                 
-            if(p2_shooter.shot_board[p1_shot[0]][p2_shot[1]] == HIT):
+            if(p2_shooter.shot_board[p2_shot[0]][p2_shot[1]] == HIT):
                 print "\n Player 2 Hit! "+str(p2_shot)
-                if(is_sunk(p1_placer.ship_board[p2_shot[0]][p2_shot[1]], p1_placer.ship_board, p2_shooter.shot_board) == True):
-                    mark_kill(p1_placer.ship_board[p2_shot[0]][p2_shot[1]], p1_placer.ship_board, p2_shooter.shot_board)
+                check_is_sunk(p2_shot, p1_placer.ship_board, p2_shooter.shot_board), p2_shooter.kills
             else:
                 print "\n Player 2 Miss! "+str(p2_shot)
         
         if(not print_games):
             #Shot Result
             if(p1_shooter.shot_board[p1_shot[0]][p1_shot[1]] == HIT):
-                if(is_sunk(p2_placer.ship_board[p1_shot[0]][p1_shot[1]], p2_placer.ship_board, p1_shooter.shot_board) == True):
-                    mark_kill(p2_placer.ship_board[p1_shot[0]][p1_shot[1]], p2_placer.ship_board, p1_shooter.shot_board)
+                check_is_sunk(p1_shot, p2_placer.ship_board, p1_shooter.shot_board, p1_shooter.kills)
                 
             if(p2_shooter.shot_board[p1_shot[0]][p2_shot[1]] == HIT):
-                if(is_sunk(p1_placer.ship_board[p2_shot[0]][p2_shot[1]], p1_placer.ship_board, p2_shooter.shot_board) == True):
-                    mark_kill(p1_placer.ship_board[p2_shot[0]][p2_shot[1]], p1_placer.ship_board, p2_shooter.shot_board)
+                check_is_sunk(p2_shot, p1_placer.ship_board, p2_shooter.shot_board, p2_shooter.kills)
             
         #Check for Game Over
-        winner = check_game_over(p1_placer.ship_board, p2_placer.ship_board, board_size)
+        winner = check_game_over(p1_shooter.kills, p2_shooter.kills)
         if(winner == "NONE"):
             game_over = False
         if(winner == "TIE"):

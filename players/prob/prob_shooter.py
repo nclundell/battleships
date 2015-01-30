@@ -15,62 +15,91 @@ class prob_shooter:
     def __init__(self):
         self.shot_board = [[WATER]*board_size for i in range(board_size)]
         self.prob_board = self.read_initial_probs()
+        self.kills = 0
         self.last_row = 0
         self.last_col = 0
         self.wins = 0 #Total Wins in Full Match
         
     def make_shot(self, shot_count):
         if(self.shot_board[self.last_row][self.last_col] == HIT):
-            finish_ship()
+            #print_board(self.prob_board)
+            self.finish_ship()
         elif(self.damaged_ship_exists()):
+            #print_board(self.prob_board)
             self.finish_ship()
         else:
+            self.reweigh_board()
+            #print_board(self.prob_board)
             self.probe_for_best_shot()
         return [self.last_row, self.last_col]
         
     def mark_shot(self, shot, result):
         self.shot_board[shot[0]][shot[1]] = result
-        #print "Probability Board: \n"
-        #print_board(self.prob_board)
-        self.reweigh_board() #Reweigh prob board after every turn
         
     def reset(self):
-        self.prob_board = self.reweighBoard() #Reweigh before resetting shot board to bring successful shots over to next game
+        self.reweigh_board() #Reweigh before resetting shot board to bring successful shots over to next game
         self.shot_board = [[WATER]*self.board_size for i in range(self.board_size)]
+        self.kills = 0
         self.last_row = 0
         self.last_col = 0
         
     def finish_ship(self):
         #Search Up
-        if(self.probe_for_kill(-1, 0, ship_max_length)):
-            return
-        elif (self.shot_board[self.last_row-1][self.last_col] == HIT):
-            if(self.probe_for_kill(1, 0, ship_max_length-1)):
+        r = self.last_row-1
+        c = self.last_col
+        while r >= 0:
+            if(self.shot_board[r][c] == WATER):
+                self.last_row = r
                 return
-        #Search Left and Right
-        if(self.probe_for_kill(0, 1, ship_max_length)):
-            return
-        elif(self.shot_board[self.last_row][self.last_col+1] == HIT):
-            if(self.probe_for_kill(0, -1, ship_max_length-1)):
+            if(self.shot_board[r][c] == KILL or self.shot_board[r][c] == MISS):
+                break
+            r -= 1
+
+        #Search Left
+        r = self.last_row
+        c = self.last_col-1
+        while c >= 0:
+            if(self.shot_board[r][c] == WATER):
+                self.last_col = c
                 return
-        #Seach Down
-        if(self.probe_for_kill(1, 0, ship_max_length)):
-            return
-        if(self.probe_for_kill(0, -1, ship_max_length)):
-            return
-        else:
-            self.probe_for_best_shot()
-            return
-    def probe_for_kill(self, row_jump, col_jump, jump_range):
-        if(jump_range <= 0):
+            if(self.shot_board[r][c] == KILL or self.shot_board[r][c] == MISS):
+                break
+            c -= 1
+        
+        #Search Down
+        r = self.last_row+1
+        c = self.last_col
+        while r < board_size:
+            if(self.shot_board[r][c] == WATER):
+                self.last_row = r
+                return
+            if(self.shot_board[r][c] == KILL or self.shot_board[r][c] == MISS):
+                break
+            r += 1
+
+        #Search Right
+        r = self.last_row
+        c = self.last_col+1
+        while c < board_size:
+            if(self.shot_board[r][c] == WATER):
+                self.last_col = c
+                return
+            if(self.shot_board[r][c] == KILL or self.shot_board[r][c] == MISS):
+                break
+            c += 1
+
+    '''
+        def probe_for_kill(self, row_jump, col_jump, jump_range):
+            if(jump_range <= 0):
+                return False
+            if(self.shot_board[self.last_row][self.last_col] == MISS or self.shot_board[self.last_row][self.last_col] == KILL):
+                return False
+            elif(self.shot_board[self.last_row][self.last_col] == WATER):
+                return True
+            elif(self.probe_for_kill(self.last_row+row_jump, self.last_col+col_jump, jump_range-1)):
+                return True
             return False
-        if(self.shot_board[self.last_row][self.last_col] == MISS or self.shot_board[self.last_row][self.last_col] == KILL):
-            return False
-        elif(self.shot_board[self.last_row][self.last_col] == WATER):
-            return True
-        elif(self.probe_for_kill(self.last_row+row_jump, self.last_col+col_jump, jump_range-1)):
-            return True
-        return False
+    '''
     
     def damaged_ship_exists(self):
         for i in range(board_size):
@@ -84,17 +113,19 @@ class prob_shooter:
     def reweigh_board(self):
         for i in range(board_size):
             for j in range(board_size):
-                self.prob_board = self.new_weight(i, j)
+                self.prob_board[i][j] = self.new_weight(i, j)
                 
     def new_weight(self, row, col):
         weight = 0.0
+        
+        #for i in range((ship_max_length - ship_min_length)+1):
         for i in range(ship_max_length - ship_min_length):
             weight += self.get_vertical_weight(row, col, i)
             weight += self.get_horizontal_weight(row, col, i)
         return float(weight)
             
     def get_vertical_weight(self, row, col, length):
-        weight = 0
+        weight = 0.0
         high = row
         low = row
         while(low >= 0 and row-low < length):
@@ -110,7 +141,7 @@ class prob_shooter:
         return weight
     
     def get_horizontal_weight(self, row, col, length):
-        weight = 0
+        weight = 0.0
         high = col
         low = col
         while(low >= 0 and col-low < length):
@@ -127,6 +158,7 @@ class prob_shooter:
     
     def probe_for_best_shot(self):
         max_weight = -1
+        #print "self.prob_board ==", self.prob_board
         for i in range(board_size):
             for j in range(board_size):
                 weight = self.prob_board[i][j]
@@ -146,11 +178,4 @@ class prob_shooter:
                 board[i][j] = float(board[i][j])            
         return board[:][:]
         
-    
-    
-    
-    
-    
-    
-    
     

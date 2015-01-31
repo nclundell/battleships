@@ -172,36 +172,39 @@ for r in range(rounds):
             #Print Shot Result
             if(p1_shooter.shot_board[p1_shot[0]][p1_shot[1]] == HIT):
                 print "\n Player 1 Hit! "+str(p1_shot)
-                check_is_sunk(p1_shot, p2_placer.ship_board, p1_shooter.shot_board, p1_shooter.kills)
+                if(is_sunk(p1_shot, p2_placer.ship_board, p1_shooter.shot_board)):
+                    p1_shooter.kills += 1
             else:
                 print "\n Player 1 Miss! "+str(p1_shot)
                 
             if(p2_shooter.shot_board[p2_shot[0]][p2_shot[1]] == HIT):
                 print "\n Player 2 Hit! "+str(p2_shot)
-                check_is_sunk(p2_shot, p1_placer.ship_board, p2_shooter.shot_board), p2_shooter.kills
+                if(is_sunk(p2_shot, p1_placer.ship_board, p2_shooter.shot_board)):
+                    p2_shooter.kills += 1
             else:
                 print "\n Player 2 Miss! "+str(p2_shot)
         
         if(not print_games):
             #Shot Result
             if(p1_shooter.shot_board[p1_shot[0]][p1_shot[1]] == HIT):
-                check_is_sunk(p1_shot, p2_placer.ship_board, p1_shooter.shot_board, p1_shooter.kills)
+                if(is_sunk(p1_shot, p2_placer.ship_board, p1_shooter.shot_board)):
+                    p1_shooter.kills += 1
                 
-            if(p2_shooter.shot_board[p1_shot[0]][p2_shot[1]] == HIT):
-                check_is_sunk(p2_shot, p1_placer.ship_board, p2_shooter.shot_board, p2_shooter.kills)
+            if(p2_shooter.shot_board[p2_shot[0]][p2_shot[1]] == HIT):
+                if(is_sunk(p2_shot, p1_placer.ship_board, p2_shooter.shot_board)):
+                    p2_shooter.kills += 1
             
         #Check for Game Over
-        winner = check_game_over(p1_shooter.kills, p2_shooter.kills)
-        if(winner == "NONE"):
-            game_over = False
-        if(winner == "TIE"):
-            game_over = True
+        winner = check_game_over(p1_shooter.kills, p1_shooter.wins, p2_shooter.kills, p2_shooter.wins)
         if(winner == "P1"):
-            game_over = True
             p1_shooter.wins += 1
-        if(winner == "P2"):
             game_over = True
+        elif(winner == "P2"):
             p2_shooter.wins += 1
+            game_over = True
+        elif(winner == "TIE"):
+            game_over = True
+
         if(print_games):
             #Pause For Next Shot
             sleep(1)
@@ -216,9 +219,10 @@ for r in range(rounds):
     game_shots = 0
 
 #Print Results
-print "Player 1 wins:"+str(p1_shooter.wins)+"/"+str(rounds)
-print "Player 2 wins:"+str(p2_shooter.wins)+"/"+str(rounds)
+print "Player "+p1_name+" wins:"+str(p1_shooter.wins)+"/"+str(rounds)
+print "Player "+p2_name+" wins:"+str(p2_shooter.wins)+"/"+str(rounds)
 print "Shot Average:",average_shot_count(shots_per_game)
+
 ##Make folder "results/" before uncommenting.
 #export_shot_records(p1_name, p2_name, shots_per_game)
 

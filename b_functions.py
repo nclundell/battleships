@@ -83,20 +83,7 @@ def valid_board(board):
             return False
     return True
 
-def mark_kill(shot, ship_board, shot_board):
-    #print_board(ship_board)
-    ship = ship_board[shot[0]][shot[1]]
-    for i in range(board_size):
-        for j in range(board_size):
-            if(ship_board[i][j] == ship):
-                shot_board[i][j] = KILL
-                #? correct below?
-                #ship_board[i][j] = KILL
-
-def check_is_sunk(shot, ship_board, shot_board, kills):
-    #print "Shot: ",shot
-    print "Ship Type: ", ship_board[shot[0]][shot[1]]
-    print_board(ship_board)
+def is_sunk(shot, ship_board, shot_board):
     if isinstance(ship_board[shot[0]][shot[1]], str):
        print "shot =", shot
        print "b_functions.py,hip_board[shot[0][shot[1]] =", ship_board[shot[0]][shot[1]]
@@ -106,9 +93,12 @@ def check_is_sunk(shot, ship_board, shot_board, kills):
             if(ship_board[i][j] == ship_board[shot[0]][shot[1]] and shot_board[i][j] == HIT):
                 hits_needed -= 1
     if(hits_needed == 0):
-        kills += 1
-        print "Mark Kill!!!"
-        mark_kill(shot, ship_board, shot_board)
+        for i in range(board_size):
+            for j in range(board_size):
+                if(ship_board[i][j] == ship_board[shot[0]][shot[1]]):
+                    shot_board[i][j] = KILL
+        return True
+    return False
 
 def average_shot_count(shot_counts):
     total = 0
@@ -124,7 +114,7 @@ def export_shot_records(p1_name, p2_name, shot_records):
     shots.close()
     
 
-def check_game_over(p1_kills, p2_kills):
+def check_game_over(p1_kills, p1_wins, p2_kills, p2_wins):
     if(p1_kills == len(ships) and p2_kills == len(ships)):
         print "\nTie Game!"
         return "TIE"
@@ -136,6 +126,8 @@ def check_game_over(p1_kills, p2_kills):
         if(print_games):
             print "\nPlayer 2 Wins!"
         return "P2"
+    else:
+        return "NONE"
 
 def get_rand_float(num):
     return random.uniform(0, )

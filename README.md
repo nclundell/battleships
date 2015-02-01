@@ -45,7 +45,7 @@ For example, if you wanted to run the Dumb player against the Genetic player for
       </ul>
    </li>
    <li>
-      Probability Player (In Progress)
+      Probability Player [prob]
       <ul>
          <li>
             Places ships and shoots to opponent board based on probabilities calculated for each spot on the board.

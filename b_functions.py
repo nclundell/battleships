@@ -84,9 +84,6 @@ def valid_board(board):
     return True
 
 def is_sunk(shot, ship_board, shot_board):
-    if isinstance(ship_board[shot[0]][shot[1]], str):
-       print "shot =", shot
-       print "b_functions.py,hip_board[shot[0][shot[1]] =", ship_board[shot[0]][shot[1]]
     hits_needed = ships[ship_board[shot[0]][shot[1]]]
     for i in range(board_size):
         for j in range(board_size):

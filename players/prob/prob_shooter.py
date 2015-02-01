@@ -14,34 +14,31 @@ from b_functions import *
 class prob_shooter:
     def __init__(self):
         self.shot_board = [[WATER]*board_size for i in range(board_size)]
-        self.prob_board = self.read_initial_probs()
+        self.prob_board = [[0]*board_size for i in range(board_size)]
         self.last_row = 0
         self.last_col = 0
         self.kills = 0
         self.wins = 0
         
+    def reset(self):
+        self.reweigh_board() #Reweigh instead of resetting to bring successful shots over to next game
+        self.shot_board = [[WATER]*board_size for i in range(board_size)]
+        self.kills = 0
+        self.last_row = 0
+        self.last_col = 0
+        
     def make_shot(self, shot_count):
         if(self.shot_board[self.last_row][self.last_col] == HIT):
-            #print_board(self.prob_board)
             self.finish_ship()
         elif(self.damaged_ship_exists()):
-            #print_board(self.prob_board)
             self.finish_ship()
         else:
             self.reweigh_board()
-            #print_board(self.prob_board)
             self.probe_for_best_shot()
         return [self.last_row, self.last_col]
         
     def mark_shot(self, shot, result):
         self.shot_board[shot[0]][shot[1]] = result
-        
-    def reset(self):
-        self.reweigh_board() #Reweigh before resetting shot board to bring successful shots over to next game
-        self.shot_board = [[WATER]*board_size for i in range(board_size)]
-        self.kills = 0
-        self.last_row = 0
-        self.last_col = 0
         
     def finish_ship(self):
         #Search Up
@@ -87,19 +84,6 @@ class prob_shooter:
             if(self.shot_board[r][c] == KILL or self.shot_board[r][c] == MISS):
                 break
             c += 1
-
-    '''
-        def probe_for_kill(self, row_jump, col_jump, jump_range):
-            if(jump_range <= 0):
-                return False
-            if(self.shot_board[self.last_row][self.last_col] == MISS or self.shot_board[self.last_row][self.last_col] == KILL):
-                return False
-            elif(self.shot_board[self.last_row][self.last_col] == WATER):
-                return True
-            elif(self.probe_for_kill(self.last_row+row_jump, self.last_col+col_jump, jump_range-1)):
-                return True
-            return False
-    '''
     
     def damaged_ship_exists(self):
         for i in range(board_size):
@@ -158,7 +142,6 @@ class prob_shooter:
     
     def probe_for_best_shot(self):
         max_weight = -1
-        #print "self.prob_board ==", self.prob_board
         for i in range(board_size):
             for j in range(board_size):
                 weight = self.prob_board[i][j]

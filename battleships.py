@@ -13,7 +13,7 @@ sys.path.append("players/prob")
 sys.path.append("players/dumb")
 sys.path.append("players/genetic")
 
-#from prob_placer import *
+from prob_placer import *
 from prob_shooter import *
 from dumb_placer import *
 from dumb_shooter import *
@@ -127,13 +127,8 @@ for r in range(rounds):
     while(game_over != True):
         #Get Shots
         p1_shot = p1_shooter.make_shot(game_shots)
-        if isinstance(p1_shot, str):
-            print "p1_shot is a string!"
-            pause()
         p2_shot = p2_shooter.make_shot(game_shots)
-        if isinstance(p2_shot, str):
-            print "p2_shot is a string!"
-            pause()
+
         game_shots += 1
         
         #Mark Shot 1
@@ -154,12 +149,6 @@ for r in range(rounds):
             p1_placer.mark_shot(p2_shot, HIT)
             p2_shooter.mark_shot(p2_shot, HIT)
         
-        if isinstance(p1_shot, str):
-            print "test2: p1_shot is a string!"
-            pause()
-        if isinstance(p2_shot, str):
-            print "test2: p2_shot is a string!"
-            pause()
         if(print_games):
             #Print Boards to Screen
             print "Game #"+str(r+1)+"\n"

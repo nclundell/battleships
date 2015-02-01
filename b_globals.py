@@ -1,6 +1,6 @@
 #Board Markers
 WATER = 'W'
-KILL = '-'
+KILL = 'K'
 HIT = '*'
 MISS = '!'
 
@@ -17,6 +17,6 @@ ships = [CARRIER, BATTLESHIP, SUBMARINE, DESTROYER, CRUISER]
 ship_max_length = max(ships)
 ship_min_length = min(ships)
 board_size = 10
-print_games = False
+print_games = True
 default = "dumb"
 using_default = False

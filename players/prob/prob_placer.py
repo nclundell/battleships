@@ -18,24 +18,24 @@ class prob_placer:
         self.mark_board = [[0]*board_size for i in range(board_size)]
 
     def place_ship(self, length, ship_num):
-        horizontal_cost = sys.maxint
-        vertical_cost = sys.maxint
+        horizontal_cost = sys.maxsize
+        vertical_cost = sys.maxsize
         h_row = 0
         h_col = 0
         v_row = 0
         v_col = 0
         #Calc min Horizontal Cost
         for i in range(board_size):
-            for j in range((board_size/2)-1):
+            for j in range(int(board_size/2)-1):
                 cost, valid = self.get_cost(i, j, 0, length)
-                if((cost < horizontal_cost) and valid):
+                if((int(cost) < horizontal_cost) and valid):
                     horizontal_cost = cost
                     h_row = i
                     h_col = j
         #Calc min Vertical Cost
-        for i in range((board_size/2)-1):
+        for i in range(int(board_size/2)-1):
             for j in range(board_size):
-                cost = self.get_cost(i, j, 1, length)
+                cost, valid = self.get_cost(i, j, 1, length)
                 if((cost < vertical_cost) and valid):
                     vertical_cost = cost
                     v_row = i
@@ -58,11 +58,11 @@ class prob_placer:
         if(direction == 0):
             for i in range(length):
                 if(isinstance(self.ship_board[row][col+i], int)):
-                    return sys.maxint, False
+                    return sys.maxsize, False
                 cost += self.mark_board[row][col+i]
         if(direction == 1):
             for i in range(length):
                 if(isinstance(self.ship_board[row+i][col], int)):
-                    return sys.maxint, False
+                    return sys.maxsize, False
                 cost += self.mark_board[row+i][col]
         return cost, True

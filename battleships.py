@@ -94,7 +94,7 @@ else:
 
 #Print Default Notice
 if(using_default):
-    print "Notice: Using %s player as default!" %default
+    print("Notice: Using %s player as default!" %default)
 #Pause before Start Game
 sleep(3)
 clear()
@@ -112,13 +112,13 @@ for r in range(rounds):
     p2_valid = valid_board(p2_placer.ship_board)
     
     if not p1_valid:
-        print "Player 1 has invalid ship placement"
+        print("Player 1 has invalid ship placement")
         sys.exit(0)
     if not p2_valid:
-        print "Player 2 has invalid ship placement"
+        print("Player 2 has invalid ship placement")
         sys.exit(0)
     if(print_games):
-        print "Valid ship placements"    
+        print("Valid ship placements")    
         sleep(3)
         clear()
 
@@ -151,27 +151,27 @@ for r in range(rounds):
         
         if(print_games):
             #Print Boards to Screen
-            print "Game #"+str(r+1)+"\n"
-            print "Player 1 Shots: 							Player 2 Shots:"
-            print "    0    1    2    3    4    5    6    7    8    9                          0    1    2    3    4    5    6    7    8    9"
-            print "   ------------------------------------------------                        ------------------------------------------------"
+            print("Game #"+str(r+1)+"\n")
+            print("Player 1 Shots: 							Player 2 Shots:")
+            print("    0    1    2    3    4    5    6    7    8    9                          0    1    2    3    4    5    6    7    8    9")
+            print("   ------------------------------------------------                        ------------------------------------------------")
             for i in range(board_size):
-                print i,p1_shooter.shot_board[i],"\t\t\t",i,p2_shooter.shot_board[i],"\n"
+                print(i,p1_shooter.shot_board[i],"\t\t\t",i,p2_shooter.shot_board[i],"\n")
             
             #Print Shot Result
             if(p1_shooter.shot_board[p1_shot[0]][p1_shot[1]] == HIT):
-                print "\n Player 1 Hit! "+str(p1_shot)
+                print("\n Player 1 Hit! "+str(p1_shot))
                 if(is_sunk(p1_shot, p2_placer.ship_board, p1_shooter.shot_board)):
                     p1_shooter.kills += 1
             else:
-                print "\n Player 1 Miss! "+str(p1_shot)
+                print("\n Player 1 Miss! "+str(p1_shot))
                 
             if(p2_shooter.shot_board[p2_shot[0]][p2_shot[1]] == HIT):
-                print "\n Player 2 Hit! "+str(p2_shot)
+                print("\n Player 2 Hit! "+str(p2_shot))
                 if(is_sunk(p2_shot, p1_placer.ship_board, p2_shooter.shot_board)):
                     p2_shooter.kills += 1
             else:
-                print "\n Player 2 Miss! "+str(p2_shot)
+                print("\n Player 2 Miss! "+str(p2_shot))
         
         if(not print_games):
             #Shot Result
@@ -208,9 +208,9 @@ for r in range(rounds):
     game_shots = 0
 
 #Print Results
-print "Player "+p1_name+" wins:"+str(p1_shooter.wins)+"/"+str(rounds)
-print "Player "+p2_name+" wins:"+str(p2_shooter.wins)+"/"+str(rounds)
-print "Shot Average:",average_shot_count(shots_per_game)
+print("Player "+p1_name+" wins:"+str(p1_shooter.wins)+"/"+str(rounds))
+print("Player "+p2_name+" wins:"+str(p2_shooter.wins)+"/"+str(rounds))
+print("Shot Average:",average_shot_count(shots_per_game))
 
 ##Make folder "results/" before uncommenting.
 #export_shot_records(p1_name, p2_name, shots_per_game)

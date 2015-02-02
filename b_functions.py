@@ -18,14 +18,14 @@ def command_args(argv):
         rounds = 50
         
     if(len(argv) > 4):
-        print "Error in arguments given!"
+        print("Error in arguments given!")
         sys.exit()
         
     return p1_name, p2_name, rounds
     
 def pause():
-    print "\n"
-    raw_input("Press enter to continue")
+    print("\n")
+    input("Press enter to continue")
 
 def sleep(s):
     time.sleep(s)
@@ -43,32 +43,32 @@ def player_exists(player):
     for p in players:
         if player == p:
             return True
-    print "Player "+player+" not found!"
+    print("Player "+player+" not found!")
     return False
 
 def custom_placer_check(player):
     try:
         with open(custom_placer_path(player)) as f:
-            print player+" placer found!"
+            print(player+" placer found!")
             return True
     except IOError as e:
-        print player+" placer not found.  Using default placer."
+        print(player+" placer not found.  Using default placer.")
         using_defaults = True
         return False
 
 def custom_shooter_check(player):
     try:
         with open(custom_shooter_path(player)) as f:
-            print player+" shooter found!"
+            print(player+" shooter found!")
             return True
     except IOError as e:
-        print player+" shooter not found.  Using default shooter."
+        print(player+" shooter not found.  Using default shooter.")
         using_defaults = True
         return False
 
 def print_board(board):
     for i in range(board_size):
-        print board[i],"\n"
+        print(board[i],"\n")
     pause()
  
 def valid_board(board):
@@ -113,15 +113,15 @@ def export_shot_records(p1_name, p2_name, shot_records):
 
 def check_game_over(p1_kills, p1_wins, p2_kills, p2_wins):
     if(p1_kills == len(ships) and p2_kills == len(ships)):
-        print "\nTie Game!"
+        print("\nTie Game!")
         return "TIE"
     elif(p1_kills == len(ships)):
         if(print_games):
-            print "\nPlayer 1 Wins!"
+            print("\nPlayer 1 Wins!")
         return "P1"
     elif(p2_kills == len(ships)):
         if(print_games):
-            print "\nPlayer 2 Wins!"
+            print("\nPlayer 2 Wins!")
         return "P2"
     else:
         return "NONE"

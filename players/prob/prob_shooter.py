@@ -52,17 +52,6 @@ class prob_shooter:
                 break
             r -= 1
 
-        #Search Left
-        r = self.last_row
-        c = self.last_col-1
-        while c >= 0:
-            if(self.shot_board[r][c] == WATER):
-                self.last_col = c
-                return
-            if(self.shot_board[r][c] == KILL or self.shot_board[r][c] == MISS):
-                break
-            c -= 1
-        
         #Search Down
         r = self.last_row+1
         c = self.last_col
@@ -73,6 +62,17 @@ class prob_shooter:
             if(self.shot_board[r][c] == KILL or self.shot_board[r][c] == MISS):
                 break
             r += 1
+            
+        #Search Left
+        r = self.last_row
+        c = self.last_col-1
+        while c >= 0:
+            if(self.shot_board[r][c] == WATER):
+                self.last_col = c
+                return
+            if(self.shot_board[r][c] == KILL or self.shot_board[r][c] == MISS):
+                break
+            c -= 1
 
         #Search Right
         r = self.last_row

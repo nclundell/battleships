@@ -113,7 +113,8 @@ def export_shot_records(p1_name, p2_name, shot_records):
 
 def check_game_over(p1_kills, p1_wins, p2_kills, p2_wins):
     if(p1_kills == len(ships) and p2_kills == len(ships)):
-        print("\nTie Game!")
+        if(print_games):
+            print("\nTie Game!")
         return "TIE"
     elif(p1_kills == len(ships)):
         if(print_games):
@@ -128,5 +129,18 @@ def check_game_over(p1_kills, p1_wins, p2_kills, p2_wins):
 
 def get_rand_float(num):
     return random.uniform(0, )
+
+def print_game_boards(p1_board, p2_board):
+    #Print Boards to Screen
+    print("Player 1 Shots: 							Player 2 Shots:")
+    print("    0    1    2    3    4    5    6    7    8    9                          0    1    2    3    4    5    6    7    8    9")
+    print("   ------------------------------------------------                        ------------------------------------------------")
+    for i in range(board_size):
+        print(i,p1_board[i],"\t\t\t",i,p2_board[i],"\n")
+        
+def print_results(p1_name, p1_shooter, p2_name, p2_shooter, shots_per_game):
+    print("Player "+p1_name+" wins: "+str(p1_shooter.wins))
+    print("Player "+p2_name+" wins: "+str(p2_shooter.wins))
+    print("Shot Average:",average_shot_count(shots_per_game))
     
     

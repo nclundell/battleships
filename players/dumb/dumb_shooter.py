@@ -20,12 +20,12 @@ class dumb_shooter:
     
     def make_shot(self, shot_count):
         if(shot_count == 0):
-            return [0,0]
-        if(self.last_col == board_size-1):
+            return [self.last_row, self.last_col]
+        elif(self.last_col < board_size-1):
+            self.last_col += 1
+        else:
             self.last_row += 1
             self.last_col = 0
-        else:
-            self.last_col += 1
           
         return [self.last_row, self.last_col]
     

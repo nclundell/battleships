@@ -152,11 +152,7 @@ for r in range(rounds):
         if(print_games):
             #Print Boards to Screen
             print("Game #"+str(r+1)+"\n")
-            print("Player 1 Shots: 							Player 2 Shots:")
-            print("    0    1    2    3    4    5    6    7    8    9                          0    1    2    3    4    5    6    7    8    9")
-            print("   ------------------------------------------------                        ------------------------------------------------")
-            for i in range(board_size):
-                print(i,p1_shooter.shot_board[i],"\t\t\t",i,p2_shooter.shot_board[i],"\n")
+            print_game_boards(p1_shooter.shot_board,p2_shooter.shot_board)
             
             #Print Shot Result
             if(p1_shooter.shot_board[p1_shot[0]][p1_shot[1]] == HIT):
@@ -195,9 +191,15 @@ for r in range(rounds):
             game_over = True
 
         if(print_games):
-            #Pause For Next Shot
-            sleep(1)
-            clear()
+            if(game_over):
+                clear()
+                #Print Final Boards
+                print("Game #"+str(r+1)+" Results:\n")
+                print_game_boards(p1_shooter.shot_board,p2_shooter.shot_board)
+            else:
+                #Pause For Next Shot
+                sleep(1)
+                clear()
             
     #Reset For Next Game
     p1_placer.reset()
@@ -206,12 +208,17 @@ for r in range(rounds):
     p2_shooter.reset()
     shots_per_game.append(game_shots)
     game_shots = 0
-
-#Print Results
-print("Player "+p1_name+" wins:"+str(p1_shooter.wins)+"/"+str(rounds))
-print("Player "+p2_name+" wins:"+str(p2_shooter.wins)+"/"+str(rounds))
-print("Shot Average:",average_shot_count(shots_per_game))
+    
+    #Print Results
+    if(print_games and (r+1) < rounds):
+        print_results(p1_name, p1_shooter, p2_name, p2_shooter, shots_per_game)
+        print("Rounds Played: "+str(r+1)+"/"+str(rounds))
+        pause()
+        clear()
+    if((r+1) == rounds):
+        print_results(p1_name, p1_shooter, p2_name, p2_shooter, shots_per_game)
+        print("Match Complete!\n")
 
 ##Make folder "results/" before uncommenting.
-#export_shot_records(p1_name, p2_name, shots_per_game)
+export_shot_records(p1_name, p2_name, shots_per_game)
 

@@ -7,12 +7,14 @@
 ###Run Battleships:
 Run Battleships with the following cli command:
 ```
-   python2.7 battleships.py [p1_name] [p2_name] [rounds (optional)]
+   python battleships.py [p1_name] [p2_name] [rounds (optional)]
 ```
 For example, if you wanted to run the Dumb player against the Genetic player for 75 rounds:
 ```
-   python2.7 battleships.py dumb genetic 75
+   python battleships.py dumb genetic 75
 ```
+Note: Battleships requires Python >= 3.4
+
 ======================
 ###Defaults:
 <ul>

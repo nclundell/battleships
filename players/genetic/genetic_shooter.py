@@ -30,6 +30,11 @@ class genetic_shooter:
         self.last_row = 0
         self.last_col = 0
 
+class Gene:
+    def __init__(self):
+        self.MAX_SCALED_SIN_PLUS_COS = 10000
+        self.mutation_rate = 0.1 
+
 class shoot_fourier:
     def __init__(self):
         pass

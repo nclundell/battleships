@@ -62,6 +62,17 @@ Note: Battleships requires Python >= 3.4
          </li>
       </ul>
    </li>
+   <li>
+      Farnsworth Player [farns]
+      <ul>
+         <li>
+            Uses tree-based searching of "heat map" states to get next shots.
+         </li>
+         <li>
+            Based on Nate Kohl's "Farnsworth Opponent": http://natekohl.net/files/FarnsworthOpponent.cs
+         </li>
+      </ul>
+   </li>
 </ol>
 
 #####Additional Players:

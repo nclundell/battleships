@@ -47,24 +47,16 @@ class FarnsworthShooter:
         self.right = [[0]*board_size for i in range(board_size)]
         self.down = [[0]*board_size for i in range(board_size)]
         self.up = [[0]*board_size for i in range(board_size)]
-        #How much space each location has
-        self.space = [[0]*board_size for i in range(board_size)]
-        #How many possible hits each location has
-        self.hits = [[0]*board_size for i in range(board_size)]
         #Game Variables
         self.kills = []
     
     def make_shot(self, shot_count):
         if(len(self.must_explore) > 0 ):
-            print("Shot Option 1 \n")
             self.row, self.col = self.must_explore.pop(0)
         if(self.get_hit()):
-            print("Shot Option 2 \n")
             self.row, self.col = self.must_explore.pop(0)
         if(self.get_space()):
-            print("Shot Option 3 \n")
             self.row, self.col = self.must_explore.pop(0)
-        print(self.row, self.col)
         return [self.row, self.col]
     
     def mark_shot(self, shot, result):
@@ -193,7 +185,7 @@ class FarnsworthShooter:
         while True:
             for i in range(board_size):
                 for j in range(board_size):
-                    if(arr[i][j] == largest and self.shot_board[i][j] == WATER):
+                    if(arr[i][j] == largest):
                         if(random.random() < (1.0/count)):
                             self.must_explore.append([i, j])
                             return

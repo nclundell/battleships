@@ -230,6 +230,7 @@ for r in range(rounds):
         print_results(p1_name, p1_shooter, p2_name, p2_shooter, shots_per_game)
         print("Match Complete!\n")
 
-##Make folder "results/" before uncommenting.
-#export_shot_records(p1_name, p2_name, shots_per_game)
+if(export_records):
+    check_result_folder()
+    export_shot_records(p1_name, p2_name, shots_per_game)
 

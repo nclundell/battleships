@@ -11,19 +11,19 @@ sys.path.append("../../")
 from b_globals import *
 from b_functions import *
 
-class prob_shooter:
+class ProbShooter:
     def __init__(self):
         self.shot_board = [[WATER]*board_size for i in range(board_size)]
         self.prob_board = [[0]*board_size for i in range(board_size)]
         self.last_row = 0
         self.last_col = 0
-        self.kills = 0
+        self.kills = []
         self.wins = 0
         
     def reset(self):
         self.reweigh_board() #Reweigh instead of resetting to bring successful shots over to next game
         self.shot_board = [[WATER]*board_size for i in range(board_size)]
-        self.kills = 0
+        self.kills = []
         self.last_row = 0
         self.last_col = 0
         
@@ -62,6 +62,17 @@ class prob_shooter:
             if(self.shot_board[r][c] == KILL or self.shot_board[r][c] == MISS):
                 break
             r += 1
+        
+        #Search Right
+        r = self.last_row
+        c = self.last_col+1
+        while c < board_size:
+            if(self.shot_board[r][c] == WATER):
+                self.last_col = c
+                return
+            if(self.shot_board[r][c] == KILL or self.shot_board[r][c] == MISS):
+                break
+            c += 1
             
         #Search Left
         r = self.last_row
@@ -73,17 +84,6 @@ class prob_shooter:
             if(self.shot_board[r][c] == KILL or self.shot_board[r][c] == MISS):
                 break
             c -= 1
-
-        #Search Right
-        r = self.last_row
-        c = self.last_col+1
-        while c < board_size:
-            if(self.shot_board[r][c] == WATER):
-                self.last_col = c
-                return
-            if(self.shot_board[r][c] == KILL or self.shot_board[r][c] == MISS):
-                break
-            c += 1
     
     def damaged_ship_exists(self):
         for i in range(board_size):

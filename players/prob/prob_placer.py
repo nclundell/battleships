@@ -12,7 +12,7 @@ sys.path.append("../../")
 from b_globals import *
 from b_functions import *
 
-class prob_placer:
+class ProbPlacer:
     def __init__(self):
         self.ship_board = [[WATER]*board_size for i in range(board_size)]
         self.mark_board = [[0]*board_size for i in range(board_size)]

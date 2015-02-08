@@ -10,12 +10,12 @@ sys.path.append("../../")
 
 from b_globals import *
 
-class dumb_shooter:
+class DumbShooter:
     def __init__(self):
         self.shot_board = [[WATER]*board_size for i in range(board_size)]
         self.last_row = 0
         self.last_col = 0
-        self.kills = 0
+        self.kills = []
         self.wins = 0
     
     def make_shot(self, shot_count):
@@ -34,6 +34,6 @@ class dumb_shooter:
         
     def reset(self):
         self.shot_board = [[WATER]*board_size for i in range(board_size)]
-        self.kills = 0
+        self.kills = []
         self.last_row = 0
         self.last_col = 0

@@ -12,6 +12,7 @@ from b_globals import *
 sys.path.append("players/prob")
 sys.path.append("players/dumb")
 sys.path.append("players/genetic")
+sys.path.append("players/farns")
 
 from prob_placer import *
 from prob_shooter import *
@@ -19,6 +20,8 @@ from dumb_placer import *
 from dumb_shooter import *
 from genetic_placer import *
 from genetic_shooter import *
+from farns_placer import *
+from farns_shooter import *
 
 #Clear Screen
 clear()
@@ -31,30 +34,34 @@ if(player_exists(p1_name)):
     #Player 1 Placer
     if(custom_placer_check(p1_name)):
         if(p1_name == "prob"):
-            p1_placer = prob_placer()
+            p1_placer = ProbPlacer()
         elif(p1_name == "dumb"):
-            p1_placer = dumb_placer()
+            p1_placer = DumbPlacer()
         elif(p1_name == "genetic"):
-            p1_placer = genetic_placer()
+            p1_placer = GeneticPlacer()
+        elif(p1_name == "farns"):
+            p1_placer = FarnsworthPlacer()
         ##Add New Player here!!!!!
         #elif(p1_name == "[name]"):
         #    p1_placer = [name]_placer()
     else:
-        p1_placer = dumb_placer()
+        p1_placer = DumbPlacer()
         using_default = True
     #Player 1 Shooter
     if(custom_shooter_check(p1_name)):
         if(p1_name == "prob"):
-            p1_shooter = prob_shooter()
+            p1_shooter = ProbShooter()
         elif(p1_name == "dumb"):
-            p1_shooter = dumb_shooter()
+            p1_shooter = DumbShooter()
         elif(p1_name == "genetic"):
-            p1_shooter = genetic_shooter()
+            p1_shooter = GeneticShooter()
+        elif(p1_name == "farns"):
+            p1_shooter = FarnsworthShooter()
         ##Add New Player here!!!!!
         #elif(p1_name == "[name]"):
         #    p1_shooter = [name]_shooter()
     else:
-        p1_shooter = dumb_shooter()
+        p1_shooter = DumbShooter()
         using_default = True
 else:
     sys.exit(0)
@@ -64,30 +71,34 @@ if(player_exists(p2_name)):
     #Player 2 Placer
     if(custom_placer_check(p2_name)):
         if(p2_name == "prob"):
-            p2_placer = prob_placer()
+            p2_placer = ProbPlacer()
         elif(p2_name == "dumb"):
-            p2_placer = dumb_placer()
+            p2_placer = DumbPlacer()
         elif(p2_name == "genetic"):
-            p2_placer = genetic_placer()
+            p2_placer = GeneticPlacer()
+        elif(p2_name == "farns"):
+            p2_placer = FarnsworthPlacer()
         ##Add New Player here!!!!!
         #elif(p2_name == "[name]"):
         #    p2_placer = [name]_placer()
     else:
-        p2_placer = dumb_placer()
+        p2_placer = DumbPlacer()
         using_default = True
     #Player 2 Shooter
     if(custom_shooter_check(p2_name)):
         if(p2_name == "prob"):
-            p2_shooter = prob_shooter()
+            p2_shooter = ProbShooter()
         elif(p2_name == "dumb"):
-            p2_shooter = dumb_shooter()
+            p2_shooter = DumbShooter()
         elif(p2_name == "genetic"):
-            p2_shooter = genetic_shooter()
+            p2_shooter = GeneticShooter()
+        elif(p2_name == "farns"):
+            p2_shooter = FarnsworthShooter()
         ##Add New Player here!!!!!
         #elif(p2_name == "[name]"):
         #    p2_shooter = [name]_shooter()
     else:
-        p2_shooter = dumb_shooter()
+        p2_shooter = DumbShooter()
         using_default = True   
 else:
     sys.exit(0)
@@ -158,14 +169,14 @@ for r in range(rounds):
             if(p1_shooter.shot_board[p1_shot[0]][p1_shot[1]] == HIT):
                 print("\n Player 1 Hit! "+str(p1_shot))
                 if(is_sunk(p1_shot, p2_placer.ship_board, p1_shooter.shot_board)):
-                    p1_shooter.kills += 1
+                    p1_shooter.kills.append(p2_placer.ship_board[p1_shot[0]][p1_shot[1]])
             else:
                 print("\n Player 1 Miss! "+str(p1_shot))
                 
             if(p2_shooter.shot_board[p2_shot[0]][p2_shot[1]] == HIT):
                 print("\n Player 2 Hit! "+str(p2_shot))
                 if(is_sunk(p2_shot, p1_placer.ship_board, p2_shooter.shot_board)):
-                    p2_shooter.kills += 1
+                    p2_shooter.kills.append(p1_placer.ship_board[p2_shot[0]][p2_shot[1]])
             else:
                 print("\n Player 2 Miss! "+str(p2_shot))
         
@@ -173,11 +184,11 @@ for r in range(rounds):
             #Shot Result
             if(p1_shooter.shot_board[p1_shot[0]][p1_shot[1]] == HIT):
                 if(is_sunk(p1_shot, p2_placer.ship_board, p1_shooter.shot_board)):
-                    p1_shooter.kills += 1
+                    p1_shooter.kills.append(p2_placer.ship_board[p1_shot[0]][p1_shot[1]])
                 
             if(p2_shooter.shot_board[p2_shot[0]][p2_shot[1]] == HIT):
                 if(is_sunk(p2_shot, p1_placer.ship_board, p2_shooter.shot_board)):
-                    p2_shooter.kills += 1
+                    p2_shooter.kills.append(p1_placer.ship_board[p2_shot[0]][p2_shot[1]])
             
         #Check for Game Over
         winner = check_game_over(p1_shooter.kills, p1_shooter.wins, p2_shooter.kills, p2_shooter.wins)
@@ -220,5 +231,5 @@ for r in range(rounds):
         print("Match Complete!\n")
 
 ##Make folder "results/" before uncommenting.
-export_shot_records(p1_name, p2_name, shots_per_game)
+#export_shot_records(p1_name, p2_name, shots_per_game)
 

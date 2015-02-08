@@ -112,15 +112,15 @@ def export_shot_records(p1_name, p2_name, shot_records):
     
 
 def check_game_over(p1_kills, p1_wins, p2_kills, p2_wins):
-    if(p1_kills == len(ships) and p2_kills == len(ships)):
+    if(len(p1_kills) == len(ships) and len(p2_kills) == len(ships)):
         if(print_games):
             print("\nTie Game!")
         return "TIE"
-    elif(p1_kills == len(ships)):
+    elif(len(p1_kills) == len(ships)):
         if(print_games):
             print("\nPlayer 1 Wins!")
         return "P1"
-    elif(p2_kills == len(ships)):
+    elif(len(p2_kills) == len(ships)):
         if(print_games):
             print("\nPlayer 2 Wins!")
         return "P2"

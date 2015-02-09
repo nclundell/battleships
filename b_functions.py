@@ -146,5 +146,3 @@ def print_results(p1_name, p1_shooter, p2_name, p2_shooter, shots_per_game):
 def check_result_folder():
     if(os.path.isdir("results") == False):
         os.makedirs("results")
-    
-    

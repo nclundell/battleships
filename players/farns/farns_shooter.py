@@ -1,6 +1,6 @@
 #@author Nathan Lundell
 #@date January 2015
-#@player farnsworth
+#@player farns
 #
 #Shooter for @player
 #

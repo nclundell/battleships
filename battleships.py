@@ -43,7 +43,7 @@ if(player_exists(p1_name)):
             p1_placer = FarnsworthPlacer()
         ##Add New Player here!!!!!
         #elif(p1_name == "[name]"):
-        #    p1_placer = [name]_placer()
+        #    p1_placer = [name]Placer()
     else:
         p1_placer = DumbPlacer()
         using_default = True
@@ -59,7 +59,7 @@ if(player_exists(p1_name)):
             p1_shooter = FarnsworthShooter()
         ##Add New Player here!!!!!
         #elif(p1_name == "[name]"):
-        #    p1_shooter = [name]_shooter()
+        #    p1_shooter = [name]Shooter()
     else:
         p1_shooter = DumbShooter()
         using_default = True
@@ -80,7 +80,7 @@ if(player_exists(p2_name)):
             p2_placer = FarnsworthPlacer()
         ##Add New Player here!!!!!
         #elif(p2_name == "[name]"):
-        #    p2_placer = [name]_placer()
+        #    p2_placer = [name]Placer()
     else:
         p2_placer = DumbPlacer()
         using_default = True
@@ -96,7 +96,7 @@ if(player_exists(p2_name)):
             p2_shooter = FarnsworthShooter()
         ##Add New Player here!!!!!
         #elif(p2_name == "[name]"):
-        #    p2_shooter = [name]_shooter()
+        #    p2_shooter = [name]Shooter()
     else:
         p2_shooter = DumbShooter()
         using_default = True   

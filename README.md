@@ -95,4 +95,7 @@ Additional players can be added via the following steps:
    <li>
       Add relevant code to instantiation sections of battleships.py
    </li>
+   <li>
+      Add [name] to list of players in b_globals.py
+   </li>
 </ol>

@@ -11,15 +11,12 @@ from b_globals import *
 #Import Players
 sys.path.append("players/prob")
 sys.path.append("players/dumb")
-sys.path.append("players/genetic")
 sys.path.append("players/farns")
 
 from prob_placer import *
 from prob_shooter import *
 from dumb_placer import *
 from dumb_shooter import *
-from genetic_placer import *
-from genetic_shooter import *
 from farns_placer import *
 from farns_shooter import *
 
@@ -37,8 +34,6 @@ if(player_exists(p1_name)):
             p1_placer = ProbPlacer()
         elif(p1_name == "dumb"):
             p1_placer = DumbPlacer()
-        elif(p1_name == "genetic"):
-            p1_placer = GeneticPlacer()
         elif(p1_name == "farns"):
             p1_placer = FarnsworthPlacer()
         ##Add New Player here!!!!!
@@ -53,8 +48,6 @@ if(player_exists(p1_name)):
             p1_shooter = ProbShooter()
         elif(p1_name == "dumb"):
             p1_shooter = DumbShooter()
-        elif(p1_name == "genetic"):
-            p1_shooter = GeneticShooter()
         elif(p1_name == "farns"):
             p1_shooter = FarnsworthShooter()
         ##Add New Player here!!!!!
@@ -74,8 +67,6 @@ if(player_exists(p2_name)):
             p2_placer = ProbPlacer()
         elif(p2_name == "dumb"):
             p2_placer = DumbPlacer()
-        elif(p2_name == "genetic"):
-            p2_placer = GeneticPlacer()
         elif(p2_name == "farns"):
             p2_placer = FarnsworthPlacer()
         ##Add New Player here!!!!!
@@ -90,8 +81,6 @@ if(player_exists(p2_name)):
             p2_shooter = ProbShooter()
         elif(p2_name == "dumb"):
             p2_shooter = DumbShooter()
-        elif(p2_name == "genetic"):
-            p2_shooter = GeneticShooter()
         elif(p2_name == "farns"):
             p2_shooter = FarnsworthShooter()
         ##Add New Player here!!!!!

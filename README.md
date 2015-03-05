@@ -55,14 +55,6 @@ Note: Battleships requires Python >= 3.4
       </ul>
    </li>
    <li>
-      Genetic Player (In Progress)
-      <ul>
-         <li>
-            Uses genetic algorithms to develop placing and shooting strategies.
-         </li>
-      </ul>
-   </li>
-   <li>
       Farnsworth Player [farns]
       <ul>
          <li>

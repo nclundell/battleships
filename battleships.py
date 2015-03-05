@@ -1,6 +1,8 @@
- #@author Nathan Lundell
- #@date January 2015
- #Main runner for Battleships simulator
+#@author Nathan Lundell
+#@date January 2015
+#Main runner for Battleships simulator
+#
+#All code at https://github.com/nclundell/battleships
 
 import sys
 import os
